@@ -37,9 +37,7 @@ class Solution_2 {
 
     public static void main(String args[]) {
         Solution_2 solution = new Solution_2();
-        int[] nums_1 = { 1, 2, 3, 4 };
-        int[] nums_2 = { 1, 1, 1, 1, 1 };
-        int[] nums_3 = { 3, 1, 2, 10, 1 };
+        int[] nums_1 = { 1, 2, 3, 4 }, nums_2 = { 1, 1, 1, 1, 1 }, nums_3 = { 3, 1, 2, 10, 1 };
         System.out.println(Arrays.toString(solution.runningSum(nums_1)));
         System.out.println(Arrays.toString(solution.runningSum(nums_2)));
         System.out.println(Arrays.toString(solution.runningSum(nums_3)));
