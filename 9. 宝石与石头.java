@@ -34,9 +34,9 @@ class Solution_9 {
 
     public static void main(String args[]) {
         Solution_9 solution = new Solution_9();
-        int num_1 = 14, num_2 = 8, num_3 = 123;
-        System.out.println(solution.numberOfSteps(num_1));
-        System.out.println(solution.numberOfSteps(num_2));
-        System.out.println(solution.numberOfSteps(num_3));
+        String J_1 = "aA", J_2 = "z";
+        String S_1 = "aAAbbbb", S_2 = "ZZ";
+        System.out.println(solution.numJewelsInStones(J_1, S_1));
+        System.out.println(solution.numJewelsInStones(J_2, S_2));
     }
 }
