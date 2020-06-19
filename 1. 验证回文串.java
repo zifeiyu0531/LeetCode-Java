@@ -11,17 +11,17 @@
 // 输入: "race a car"
 // 输出: false
 
-class Solution {
+class Solution_1 {
     public boolean isPalindrome(String s) {
         int i = 0, j = s.length() - 1;
         while (i < j) {
-            while(i < j && !Character.isLetterOrDigit(s.charAt(i))){
+            while (i < j && !Character.isLetterOrDigit(s.charAt(i))) {
                 i++;
             }
-            while(i < j && !Character.isLetterOrDigit(s.charAt(j))){
+            while (i < j && !Character.isLetterOrDigit(s.charAt(j))) {
                 j--;
             }
-            if(i < j && Character.toLowerCase(s.charAt(i)) != Character.toLowerCase(s.charAt(j))){
+            if (i < j && Character.toLowerCase(s.charAt(i)) != Character.toLowerCase(s.charAt(j))) {
                 return false;
             }
             i++;
@@ -31,7 +31,7 @@ class Solution {
     }
 
     public static void main(String args[]) {
-        Solution solution = new Solution();
+        Solution_1 solution = new Solution_1();
         System.out.println(solution.isPalindrome("A man, a plan, a canal: Panama"));
         System.out.println(solution.isPalindrome("race a car"));
     }
