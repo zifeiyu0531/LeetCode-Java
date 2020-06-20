@@ -1,6 +1,7 @@
 # 字符串
 ## String
 str.indexOf(String s) 查找字符串s在指定字符串中首次出现的位置
+
 str.lastIndexOf(String s) 查找字符串s在指定字符串中最后一次出现的位置
 ```Java
 String str = "hello world";
@@ -13,6 +14,7 @@ String str = "hello world";
 char mychar = str.charAt(6);
 ```
 str.substring(int beginIndex)
+
 str.substring(int beginIndex, int endIndex)
 截取字符串字串
 ```Java
@@ -31,6 +33,7 @@ String str = "hello world";
 String newstr = str.replace("h", "H");
 ```
 str.startsWith(String prefix) 判断字符串开始是否符合prefix
+
 str.endsWith(String suffix) 判断字符串结尾是否符合suffix
 ```Java
 String str = "hello world";
@@ -44,6 +47,7 @@ String str_2 = "Hello World";
 boolean b = str.equalsIgnoreCase(str_2);
 ```
 str.toLowerCase() 大写转小写
+
 str.toUpperCase() 小写转大写
 ```Java
 String str = "hello world";
@@ -51,6 +55,7 @@ String newstr_1 = str.toLowerCase();
 String newstr_2 = str.toUpperCase();
 ```
 str.split(String sign) 将字符串分割成字符串数组
+
 str.split(String sign, int limit) limit：分割次数
 ```Java
 String str = "192.168.0.1";
@@ -65,7 +70,9 @@ boolean b = str.matches(regex);
 ```
 ## StringBuilder
 bf.append(Object obj) 向字符串中追加内容
+
 bf.insert(int offset, Object obj) 向指定位置插入内容
+
 bf.delete(int start, int end) 删除指定位置的子串
 ```Java
 StringBuilder bf = new StringBuilder("hello");
