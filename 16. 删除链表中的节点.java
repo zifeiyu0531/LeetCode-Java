@@ -25,50 +25,8 @@
 // 给定的节点为非末尾节点并且一定是链表中的一个有效节点。
 // 不要从你的函数中返回任何结果。
 
-class ListNode_2 {
-    int val;
-    ListNode_2 next;
-
-    ListNode_2() {
-    }
-
-    ListNode_2(int x) {
-        val = x;
-        next = null;
-    }
-
-    public String toString() {
-        String s = "";
-        ListNode_2 node = this;
-        while (node != null) {
-            s += node.val;
-            if (node.next != null) {
-                s += "->";
-            }
-            node = node.next;
-        }
-        return s;
-    }
-
-    public static ListNode_2 buildList(int[] nums) {
-        ListNode_2 header = new ListNode_2();
-        ListNode_2 p = new ListNode_2();
-        for (int i = 0; i < nums.length; i++) {
-            ListNode_2 node = new ListNode_2(nums[i]);
-            if (i == 0) {
-                header = node;
-                p = header;
-            } else {
-                p.next = node;
-                p = p.next;
-            }
-        }
-        return header;
-    }
-}
-
 class Solution_16 {
-    public void deleteNode(ListNode_2 node) {
+    public void deleteNode(ListNode node) {
         node.val = node.next.val;
         node.next = node.next.next;
     }
@@ -76,8 +34,8 @@ class Solution_16 {
     public static void main(String args[]) {
         Solution_16 solution = new Solution_16();
         int[] nums = { 4, 5, 1, 9 };
-        ListNode_2 header = ListNode_2.buildList(nums);
-        ListNode_2 node = header.next;
+        ListNode header = ListNode.buildList(nums);
+        ListNode node = header.next;
         solution.deleteNode(node);
         System.out.println(header.toString());
     }
