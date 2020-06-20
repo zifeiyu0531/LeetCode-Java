@@ -7,48 +7,6 @@
 // 输入：单向链表a->b->c->d->e->f中的节点c
 // 结果：不返回任何数据，但该链表变为a->b->d->e->f
 
-class ListNode {
-    int val;
-    ListNode next;
-
-    ListNode() {
-    }
-
-    ListNode(int x) {
-        val = x;
-        next = null;
-    }
-
-    public String toString() {
-        String s = "";
-        ListNode node = this;
-        while (node != null) {
-            s += node.val;
-            if (node.next != null) {
-                s += "->";
-            }
-            node = node.next;
-        }
-        return s;
-    }
-
-    public static ListNode buildList(int[] nums) {
-        ListNode header = new ListNode();
-        ListNode p = new ListNode();
-        for (int i = 0; i < nums.length; i++) {
-            ListNode node = new ListNode(nums[i]);
-            if (i == 0) {
-                header = node;
-                p = header;
-            } else {
-                p.next = node;
-                p = p.next;
-            }
-        }
-        return header;
-    }
-}
-
 class Solution_6 {
     public void deleteNode(ListNode node) {
         node.val = node.next.val;
