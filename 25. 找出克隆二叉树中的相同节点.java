@@ -50,10 +50,10 @@ class Solution_25 {
             return cloned;
         }
         if (original.left != null) {
-            p =  getTargetCopy(original.left, cloned.left, target);
+            p = getTargetCopy(original.left, cloned.left, target);
         }
         if (p == null && original.right != null) {
-            p =  getTargetCopy(original.right, cloned.right, target);
+            p = getTargetCopy(original.right, cloned.right, target);
         }
         return p;
     }
