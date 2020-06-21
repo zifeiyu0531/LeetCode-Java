@@ -81,3 +81,26 @@ bf.insert(5, " ");
 bf.delete(3, 6);
 System.out.println(bf.toString());
 ```
+# 数组
+## Arrays
+Arrays.sort(obj) 数组升序排序,obj:待排序数组
+```Java
+int[] arr = {9, 5, 2, 7};
+Arrays.sort(arr);
+```
+Arrays.copyOf(arr, int length) 复制数组，arr：待复制的数组，length：新数组长度
+
+Arrays.copyOfRange(arr, int fromIndex, int toIndex) 复制数组的指定部分
+```Java
+int[] arr = {9, 5, 2, 7};
+int[] newarr1 = Arrays.copyOf(arr, 5);
+int[] newarr2 = Arrays.copyOfRange(arr, 1, 3);
+```
+Arrays.binarySearch(Object[] a, Object key) 在数组a中二分查找key，返回下标,否则返回-1
+
+Arrays.binarySearch(Object[] a, int fromIndex, int toIndex, Object key) 在数组a中指定范围二分查找key，返回下标,否则返回-1
+```Java
+int[] arr = {9, 5, 2, 7};
+int index1 = Arrays.binarySearch(arr, 5);
+int index2 = Arrays.binarySearch(arr, 0, 3, 5);
+```
