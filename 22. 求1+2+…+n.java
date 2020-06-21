@@ -18,7 +18,7 @@
 
 class Solution_22 {
     public int sumNums(int n) {
-        boolean b = n > 0 && (n += sumNums(n - 1)) > 0;
+        if(n > 0 && (n += sumNums(n - 1)) > 0);
         return n;
     }
 
