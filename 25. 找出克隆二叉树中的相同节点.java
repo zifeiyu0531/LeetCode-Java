@@ -59,6 +59,5 @@ class Solution_25 {
     }
 
     public static void main(String args[]) {
-        Solution_25 solution = new Solution_25();
     }
 }
