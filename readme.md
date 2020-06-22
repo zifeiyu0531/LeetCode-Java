@@ -68,6 +68,11 @@ String str = "hello wobrld";
 String regex = "[a-zA-Z]";
 boolean b = str.matches(regex);
 ```
+str.toCharArray() 字符串转char[]
+```Java
+String str = "hello wobrld";
+char[] ch = str.toCharArray();
+```
 ## StringBuilder
 bf.append(Object obj) 向字符串中追加内容
 
