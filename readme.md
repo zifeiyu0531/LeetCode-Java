@@ -79,12 +79,14 @@ bf.append(Object obj) 向字符串中追加内容
 bf.insert(int offset, Object obj) 向指定位置插入内容
 
 bf.delete(int start, int end) 删除指定位置的子串
+
+bf.reverse() 字符串反转
 ```Java
 StringBuilder bf = new StringBuilder("hello");
 bf.append("world");
 bf.insert(5, " ");
 bf.delete(3, 6);
-System.out.println(bf.toString());
+bf.reverse();
 ```
 # 数组
 ## Arrays
