@@ -111,3 +111,78 @@ int[] arr = {9, 5, 2, 7};
 int index1 = Arrays.binarySearch(arr, 5);
 int index2 = Arrays.binarySearch(arr, 0, 3, 5);
 ```
+# 包装类
+## Integer
+Integer.parseInt(String str) String转Integer
+```Java
+String str = "96";
+int myint = Integer.parseInt(str);
+```
+## Character
+Character.toUpperCase(char ch) 小写转大写
+
+Character.toLowerCase(char ch) 大写转小写
+
+Character.isUpperCase(char ch) 判断是否为大写
+
+Character.isLowerCase(char ch) 判断是否为小写
+```Java
+char ch = 'c';
+char ch1 = Character.toUpperCase(ch);
+char ch2 = Character.toLowerCase(ch);
+boolean isUpper = Character.isUpperCase(ch);
+boolean isLower = Character.isLowerCase(ch);
+```
+Character.isLetter(char ch) 判断是否为字母
+
+Character.isDigit(char ch) 判断是否为数字
+
+Character.isLetterOrDigit(char ch) 判断是否为字母或数字
+```Java
+char ch1 = 'c';
+char ch2 = '1';
+boolean isLetter = Character.isLetter(ch1);
+boolean isDigit = Character.isDigit(ch2);
+boolean letter_digit = Character.isLetterOrDigit(ch2);
+```
+# 数字处理类
+## Math
+Math.sin(double a) 返回角a的正弦值
+
+Math.cos(double a) 返回角a的余弦值
+
+Math.tan(double a) 返回角a的正切值
+```Java
+Double a = Math.sin(Math.PI/2);
+Double b = Math.cos(Math.PI/2);
+Double c = Math.tan(Math.PI/3);
+```
+Math.exp(double a) 返回e的a次方
+
+Math.log(double a) 取a的自然对数，即lna
+
+Math.log10(double a) 取底数为10的对数
+
+Math.sqrt(double a) 返回a的平方根
+
+Math.pow(double a, double b) 取a的b次方
+```Java
+Double a = Math.exp(2);
+Double b = Math.log(2);
+Double c = Math.log10(2);
+Double d = Math.sqrt(2);
+Double e = Math.pow(2, 2);
+```
+Math.random() 返回一个0.0-1.0之间的double型数字
+```Java
+Double a = Math.random();
+```
+## Random
+r.nextInt() 返回一个随机整数
+
+r.nextInt(int n) 返回一个大于等于0小于n的随机整数
+```Java
+Random r = new Random();
+int a = r.nextInt();
+int b = r.nextInt(10);
+```
