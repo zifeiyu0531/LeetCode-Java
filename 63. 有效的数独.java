@@ -51,8 +51,11 @@ import java.util.*;
 
 class Solution_63 {
     public boolean isValidSudoku(char[][] board) {
+        @SuppressWarnings("all")
         HashMap<Integer, Integer>[] rows = new HashMap[9];
+        @SuppressWarnings("all")
         HashMap<Integer, Integer>[] columns = new HashMap[9];
+        @SuppressWarnings("all")
         HashMap<Integer, Integer>[] boxes = new HashMap[9];
         for (int i = 0; i < 9; i++) {
             rows[i] = new HashMap<Integer, Integer>();
