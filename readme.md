@@ -186,3 +186,17 @@ Random r = new Random();
 int a = r.nextInt();
 int b = r.nextInt(10);
 ```
+# 集合类
+## Collection接口
+collection.iterator() 返回用于遍历对象的迭代器
+```Java
+Collection<String> list = new ArrayList<>();
+list.add("a");
+list.add("b");
+list.add("c");
+Iterator<String> it = list.iterator();
+while(it.hasNext()){
+    String str = (String) it.next();
+    System.out.println(str);
+}
+```
