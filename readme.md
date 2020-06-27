@@ -1,3 +1,4 @@
+[toc]
 # 字符串
 ## String
 str.indexOf(String s) 查找字符串s在指定字符串中首次出现的位置
