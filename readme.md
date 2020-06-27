@@ -435,3 +435,71 @@ public class PriorityTest {
 }
 ```
 ## 线程同步
+### 同步块
+使用关键字`synchronized`建立同步块，在同步块中对共享资源进行操作
+```java
+public class ThreadSafeTest implements Runnable {
+    int num = 10;
+
+    public void run() {
+        while(true) {
+            //同步块
+            synchronized("") {
+                if(num > 0) {
+                    try {
+                        Thread.sleep(100);
+                    } catch(Exception e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println(--num);
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        ThreadSafeTest test = new ThreadSafeTest();
+        Thread threadA = new Thread(test);
+        Thread threadB = new Thread(test);
+        Thread threadC = new Thread(test);
+        threadA.start();
+        threadB.start();
+        threadC.start();
+    }
+}
+```
+### 同步方法
+在方法之前使用关键字`synchronized`进行修饰，将共享资源的操作写在同步方法中
+```java
+public class ThreadSafeTest implements Runnable {
+    int num = 10;
+
+    public void run() {
+        while(true) {
+            safe();
+        }
+    }
+
+    //同步方法
+    public synchronized void safe() {
+        if(num > 0) {
+            try {
+                Thread.sleep(100);
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+            System.out.println(--num);
+        }
+    }
+
+    public static void main(String[] args) {
+        ThreadSafeTest test = new ThreadSafeTest();
+        Thread threadA = new Thread(test);
+        Thread threadB = new Thread(test);
+        Thread threadC = new Thread(test);
+        threadA.start();
+        threadB.start();
+        threadC.start();
+    }
+}
+```
