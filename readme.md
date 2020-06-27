@@ -188,15 +188,250 @@ int b = r.nextInt(10);
 ```
 # 集合类
 ## Collection接口
+collection.add(Object o) 将指定对象添加到该集合中
+
+collection.remove(Object o) 将指定对象从集合中删除
+
 collection.iterator() 返回用于遍历对象的迭代器
+
+collection.size() 返回该集合中元素的个数
 ```Java
 Collection<String> list = new ArrayList<>();
 list.add("a");
 list.add("b");
 list.add("c");
+list.remove("a");
+int size = list.size();
 Iterator<String> it = list.iterator();
 while(it.hasNext()){
     String str = (String) it.next();
     System.out.println(str);
 }
 ```
+## Set集合
+set.first() 返回集合中第一个元素
+
+set.last() 返回集合中最后一个元素
+```Java
+Set<String> set = new HashSet<>();
+set.add("a");
+set.add("b");
+set.add("c");
+String first = set.first();
+String last = set.last();
+}
+```
+## Map集合
+map.put(K key, V value) 向集合中添加指定的key-value键值对
+
+map.containsKey(K key) 集合中是否包含键key，若包含返回true
+
+map.containsValue(V value) 集合中是否包含值value，若包含返回true
+
+map.get(K key) 返回集合中键key对应的值value
+
+map.keySet() 返回集合中所有key组成的Set集合
+
+map.values() 返回集合中所有value组成的Collection集合
+```Java
+Map<String, Integer> map = new HashMap<>();
+map.put("Chinese", 80);
+map.put("Math", 90);
+map.put("English", 70);
+boolean hasKey = map.containsKey("Math");   //true
+boolean hasValue = map.containsValue(100);  //false
+int math = map.get("Math");                 //90
+Set<String> set = map.keySet();
+Collection<Integer> list = map.values();
+```
+# 异常
+## 自定义异常
+```Java
+public class MyException extends Exception {
+    String message;
+
+    public MyException(String message) {
+        this.message = message;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+}
+
+public class Captor {
+    static int divide(int x, int y) {
+        if(y == 0) {
+            throw new MyException("除数不能为0");
+        }
+        return x / y;
+    }
+
+    public static void main(String[] args) {
+        try {
+            int result = divide(2, 0);
+        } catch(MyException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
+```
+# 多线程
+## Thread
+继承Thread类并重写run()方法，通过start()方法启动线程
+```Java
+public class ThreadTest extends Thread {
+    private int count = 10;
+
+    public void run() {
+        while (true) {
+            System.out.println(count + " ");
+            if(--count == 0){
+                return;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        new ThreadTest().start();
+    }
+}
+```
+## 线程休眠
+调用sleep()方法使线程休眠，由于sleep()方法的执行可能抛出InterruptedException异常，所以将slee()方法的调用放在try-catch块中
+```Java
+try {
+    Thread.sleep(2000); //休眠2秒
+} catch(InterruptedException) {
+    e.printStackTrace();
+}
+```
+## 线程加入
+调用join()方法在线程执行过程中加入另一个线程，原线程需等待加入线程执行完毕之后继续执行
+```Java
+public class JoinTest {
+    private Thread threadA;
+    private Thread threadB;
+
+    public static void main(String[] args) {
+        new JoinTest();
+    }
+
+    public JoinTest() {
+        //使用匿名内部类形式初始化Thread对象
+        threadA = new Thread(new Runnable() {
+            int count = 0;
+
+            public void run() {
+                while(true) {
+                    System.out.println(++count);
+                    try {
+                        Thread.sleep(100);
+                        threadB.join();
+                    } catch(Exception e) {
+                        e.printStackTrace();
+                    }
+                    if(count == 100) {
+                        break;
+                    }
+                }
+            }
+        });
+        threadA.start();
+        threadB = new Thread(new Runnable() {
+            int count = 0;
+
+            public void run() {
+                while(true) {
+                    System.out.println(++count);
+                    try {
+                        Thread.sleep(100);
+                    } catch(Exception e){
+                        e.printStackTrace();
+                    }
+                    if(count == 100) {
+                        break;
+                    }
+                }
+            }
+        });
+    }
+}
+```
+## 线程中断
+使用stop()方法停止线程已被废除，提倡在run()方法中使用无限循环，添加一个布尔值控制循环终止。
+
+当线程使用sleep()或wait()方法进入就绪状态时，使用Thread类中的interrupt()方法结束线程，此时程序会抛出InterruptedException异常。可以在处理该异常的同时完成线程中断业务处理，如关闭数据库连接，关闭Socket等。
+```Java
+public class InterruptTest {
+    Thread thread;
+
+    public class void main(String[] args) {
+        new InterruptTest();
+    }
+
+    public InterruptTest() {
+        thread = new Thread(new Runnable() {
+            int count = 0;
+
+            public void run() {
+                while(true) {
+                    System.out.println(++count);
+                    try {
+                        thread.sleep(100);
+                    } catch(InterruptedException e) {
+                        System.out.println("线程中断");
+                        break;
+                    }
+                }
+            }
+        });
+        thread.start();
+        thread.interrupt();
+    }
+}
+```
+## 线程优先级
+使用setPriority()方法调整线程优先级，优先级1~10取整数，数字越大优先级越高，若设置的优先级不在该范围内，将产生IllegalArgumentException
+```Java
+public class PriorityTest {
+    public PriorityTest() {
+        Thread threadA = new Thread(new MyThread());
+        Thread threadB = new Thread(new MyThread());
+        Thread threadC = new Thread(new MyThread());
+        setPriority("threadA", 5, threadA);
+        setPriority("threadB", 4, threadB);
+        setPriority("threadC", 3, threadC);
+    }
+
+    public static void setPriority(String name, int priority, Thread thread) {
+        thread.setPriority(priority);   //设置优先级
+        thread.setName(name);           //设置线程名
+        thread.start();
+    }
+
+    public static void main(String[] args) {
+        new PriorityTest();
+    }
+
+    //定义一个实现Runnable接口的类用于创建线程
+    private final class MyThread implements Runnable {
+        int count = 0;
+
+        public void run() {
+            while(true) {
+                System.out.println(++count);
+                try {
+                    Thread.sleep(100);
+                } catch(InterruptedException e) {
+                    System.out.println("线程中断");
+                }
+                if(count == 100){
+                    break;
+                }
+            }
+        }
+    }
+}
+```
+## 线程同步
