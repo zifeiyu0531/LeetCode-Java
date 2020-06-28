@@ -24,6 +24,14 @@
   - [线程同步](#线程同步)
     - [同步块](#同步块)
     - [同步方法](#同步方法)
+- [网络通信](#网络通信)
+  - [InetAddress](#inetaddress)
+  - [TCP](#tcp)
+      - [客户端](#客户端)
+      - [服务器端](#服务器端)
+  - [UDP](#udp)
+      - [客户端](#客户端-1)
+      - [服务器端](#服务器端-1)
 # 字符串
 ## String
 str.indexOf(String s) 查找字符串s在指定字符串中首次出现的位置
@@ -529,3 +537,11 @@ public class ThreadSafeTest implements Runnable {
     }
 }
 ```
+# 网络通信
+## InetAddress
+## TCP
+#### 客户端
+#### 服务器端
+## UDP
+#### 客户端
+#### 服务器端
