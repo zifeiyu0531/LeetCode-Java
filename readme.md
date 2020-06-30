@@ -29,6 +29,11 @@
   - [实例](#实例)
     - [客户端](#客户端)
     - [服务器端](#服务器端)
+- [文件I/O](#文件io)
+  - [FileInputStream&FileOutputStream](#fileinputstreamfileoutputstream)
+  - [FileReader&FileWriter](#filereaderfilewriter)
+  - [BufferedReader&BufferedWriter](#bufferedreaderbufferedwriter)
+  - [DataInputStream&DataOutputStream](#datainputstreamdataoutputstream)
 # 字符串
 ## String
 `str.indexOf(String s)` 查找字符串s在指定字符串中首次出现的位置
@@ -632,5 +637,156 @@ public class ServerTest {
 ## FileInputStream&FileOutputStream
 使用`FileInputStream`类读取文件内容，使用`FileOutputStream`类写入文件
 ```java
+import java.io.*;
 
+public class FileTest {
+    public static void main(String[] args) {
+        File file = new File("test.txt"); // 建立文件
+        try {
+            FileOutputStream out = new FileOutputStream(file);// 通过文件创建FileOutputStream对象
+            byte[] text = "这是一段测试内容".getBytes();
+            out.write(text); // 写入文件
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            FileInputStream in = new FileInputStream(file);// 通过文件创建FileInputStream对象
+            byte[] bytes = new byte[1024];
+            int len = in.read(bytes);// 读取文件内容
+            System.out.println(new String(bytes, 0, len));
+            in.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+## FileReader&FileWriter
+使用上面的文件I/O类只能读写字节型数据，而FileReader类和FileWriter类可以直接对字符进行读写。其中，`FileReader`用于从文件中读取数据，`FileWriter`用于写入文件
+```java
+import java.io.*;
+
+public class FileTest {
+    public static void main(String[] args) {
+        File file = new File("test.txt"); // 建立文件
+        try {
+            FileWriter out = new FileWriter(file);// 通过文件创建FileWriter对象
+            String text = "这是一段测试内容";
+            out.write(text); // 写入文件
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            FileReader in = new FileReader(file);// 通过文件创建FileReader对象
+            char[] bytes = new char[1024];
+            int len = in.read(bytes);// 读取文件内容
+            System.out.println(new String(bytes, 0, len));
+            in.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+## BufferedReader&BufferedWriter
+带缓存的文件I/O
+```java
+import java.io.*;
+
+public class BufferTest {
+    public static void main(String[] args) {
+        String[] texts = { "第一行数据", "第二行数据", "第三行数据" };
+        File file = new File("test.txt"); // 建立文件
+        try {
+            FileWriter out = new FileWriter(file);// 通过文件创建FileWriter对象
+            BufferedWriter buf_out = new BufferedWriter(out);// 通过FileWriter对象创建BufferedWriter对象
+            for (int i = 0; i < texts.length; i++) {
+                buf_out.write(texts[i]); // 写入文件
+                buf_out.newLine(); // 换行
+            }
+            buf_out.close();
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            FileReader in = new FileReader(file);// 通过文件创建FileReader对象
+            BufferedReader buf_in = new BufferedReader(in);// 通过FileReader对象创建BufferedReader对象
+            String s = buf_in.readLine(); // 按行读取文件内容
+            while (s != null) {
+                System.out.println(s);
+                s = buf_in.readLine();
+            }
+            buf_in.close();
+            in.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+## DataInputStream&DataOutputStream
+支持多种数据类型的读写方法
+
+包括但不限于：
+
+读：
+
+`readBoolean()`
+
+`readInt()`
+
+`readChar()`
+
+`readByte()`
+
+`readUTF()`
+
+写：
+
+`writeBoolean(boolean b)`
+
+`writeInt(int i)`
+
+`writeChars(String s)`
+
+`writeBytes(String s)`
+
+`writeUTF(String s)`
+```java
+import java.io.*;
+
+public class DataTest {
+    public static void main(String[] args) {
+        File file = new File("test.txt"); // 建立文件
+        try {
+            FileOutputStream out = new FileOutputStream(file);// 通过文件创建FileOutputStream对象
+            DataOutputStream data_out = new DataOutputStream(out);// 通过FileOutputStream对象创建DataOutputStream对象
+            data_out.writeBoolean(true);
+            data_out.writeInt(2);
+            data_out.writeChars("测试数据");
+            data_out.writeBytes("测试数据");
+            data_out.writeUTF("测试数据");
+            data_out.close();
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            FileInputStream in = new FileInputStream(file);// 通过文件创建FileInputStream对象
+            DataInputStream data_in = new DataInputStream(in);// 通过FileInputStream对象创建DataInputStream对象
+            System.out.println(data_in.readBoolean());
+            System.out.println(data_in.readInt());
+            System.out.println(data_in.readChar());
+            System.out.println(data_in.readByte());
+            System.out.println(data_in.readUTF());
+            data_in.close();
+            in.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
 ```
