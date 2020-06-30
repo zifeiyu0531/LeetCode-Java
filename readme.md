@@ -629,4 +629,8 @@ public class ServerTest {
 }
 ```
 # 文件I/O
-## 
+## FileInputStream&FileOutputStream
+使用`FileInputStream`类读取文件内容，使用`FileOutputStream`类写入文件
+```java
+
+```
