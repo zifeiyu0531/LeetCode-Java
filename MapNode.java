@@ -9,13 +9,13 @@ public class MapNode {
         neighbors = new ArrayList<Node>();
     }
 
-    public MapNode(int _val) {
-        val = _val;
+    public MapNode(int val) {
+        this.val = val;
         neighbors = new ArrayList<Node>();
     }
 
-    public MapNode(int _val, ArrayList<Node> _neighbors) {
-        val = _val;
-        neighbors = _neighbors;
+    public MapNode(int val, ArrayList<Node> neighbors) {
+        this.val = val;
+        this.neighbors = neighbors;
     }
 }
