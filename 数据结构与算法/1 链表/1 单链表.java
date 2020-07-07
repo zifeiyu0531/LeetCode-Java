@@ -21,6 +21,11 @@ class LinkedList {
         this.head = new LinkedNode();
     }
 
+    // 获取表头
+    public LinkedNode getHead() {
+        return head.next;
+    }
+
     // 判断链表是否为空
     public boolean isEmpty() {
         return head.next == null;
