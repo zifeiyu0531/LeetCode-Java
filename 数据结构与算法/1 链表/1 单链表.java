@@ -106,29 +106,3 @@ class LinkedList {
         return str;
     }
 }
-
-class LinkedListTest {
-    public static void main(String[] args) {
-        System.out.println("创建链表list");
-        LinkedList list = new LinkedList();
-        System.out.println("list长度：" + list.size());
-        System.out.println("是否为空：" + list.isEmpty());
-        System.out.println("向链表添加元素[1,2,3]");
-        list.add(1);
-        list.add(2);
-        list.add(3);
-        System.out.println("输出链表：" + list.toString());
-        System.out.println("向链表首部添加元素0");
-        list.add(0, 0);
-        System.out.println("输出链表：" + list.toString());
-        System.out.println("移除表尾元素3");
-        list.remove();
-        System.out.println("输出链表：" + list.toString());
-        System.out.println("移除表头元素0");
-        list.remove(0);
-        System.out.println("输出链表：" + list.toString());
-        System.out.println("list长度：" + list.size());
-        System.out.println("是否为空：" + list.isEmpty());
-        System.out.println("获取表头元素1：" + list.get(0).val);
-    }
-}
