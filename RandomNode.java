@@ -1,7 +1,7 @@
 public class RandomNode {
     int val;
-    Node next;
-    Node random;
+    RandomNode next;
+    RandomNode random;
 
     public RandomNode(int val) {
         this.val = val;
