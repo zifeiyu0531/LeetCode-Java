@@ -1,3 +1,5 @@
+import java.util.*;
+
 // 给定一个链表，每个节点包含一个额外增加的随机指针，该指针可以指向链表中的任何节点或空节点。
 
 // 要求返回这个链表的 深拷贝。 
@@ -10,19 +12,13 @@
 
 // 示例 1：
 
-
-
 // 输入：head = [[7,null],[13,0],[11,4],[10,2],[1,0]]
 // 输出：[[7,null],[13,0],[11,4],[10,2],[1,0]]
 // 示例 2：
 
-
-
 // 输入：head = [[1,1],[2,1]]
 // 输出：[[1,1],[2,1]]
 // 示例 3：
-
-
 
 // 输入：head = [[3,null],[3,0],[3,null]]
 // 输出：[[3,null],[3,0],[3,null]]
@@ -40,8 +36,20 @@
 // 节点数目不超过 1000 。
 
 class Solution_144 {
-    public Node copyRandomList(Node head) {
-        
+    HashMap<RandomNode, RandomNode> visitedHash = new HashMap<RandomNode, RandomNode>();
+
+    public RandomNode copyRandomList(RandomNode head) {
+        if (head == null) {
+            return null;
+        }
+        if (this.visitedHash.containsKey(head)) {
+            return this.visitedHash.get(head);
+        }
+        RandomNode node = new RandomNode(head.val, null, null);
+        this.visitedHash.put(head, node);
+        node.next = this.copyRandomList(head.next);
+        node.random = this.copyRandomList(head.random);
+        return node;
     }
 
     public static void main(String args[]) {
