@@ -8,4 +8,10 @@ public class RandomNode {
         this.next = null;
         this.random = null;
     }
+
+    public RandomNode(int _val, RandomNode _next, RandomNode _random) {
+        val = _val;
+        next = _next;
+        random = _random;
+    }
 }
