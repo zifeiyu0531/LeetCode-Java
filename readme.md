@@ -34,6 +34,10 @@
   - [FileReader&FileWriter](#filereaderfilewriter)
   - [BufferedReader&BufferedWriter](#bufferedreaderbufferedwriter)
   - [DataInputStream&DataOutputStream](#datainputstreamdataoutputstream)
+- [各种转换大全](#各种转换大全)
+  - [`int`,`String`,`char`的相互转换](#intstringchar的相互转换)
+  - [进制转换](#进制转换)
+  - [数组和集合的相互转换](#数组和集合的相互转换)
 # 字符串
 ## String
 `str.indexOf(String s)` 查找字符串s在指定字符串中首次出现的位置
@@ -789,4 +793,74 @@ public class DataTest {
         }
     }
 }
+```
+# 各种转换大全
+## `int`,`String`,`char`的相互转换
+`int`转`String`
+```java
+int num = 100;
+String str;
+str = String.valueOf(num);
+str = Integer.toString(num);
+```
+`String`转`int`
+```java
+String str = "100";
+int num = Integer.parseInt(str);
+```
+`int`转`char`
+```java
+int num = 9;
+char ch = (char) (num + '0');
+```
+`char`转`int`
+```java
+char ch = '9';
+int num = ch - '0';
+```
+`String`转`char`
+```java
+String str = "abc";
+char ch = str.charAt(0);
+char[] ch_array = str.toCharArray();
+```
+`char`转`String`
+```java
+char ch = 'a';
+char[] ch_array = { 'a', 'b', 'c' };
+String str;
+str = String.valueOf(ch);
+str = Character.toString(ch);
+str = String.valueOf(ch_array);
+str = new String(ch_array);
+```
+## 进制转换
+十进制转x进制
+```java
+int n = 10;
+int x = 4;
+System.out.println(n + "的二进制是:" + Integer.toBinaryString(n));
+System.out.println(n + "的八进制是:" + Integer.toOctalString(n));
+System.out.println(n + "的十六进制是:" + Integer.toHexString(n));
+System.out.println(n + "的x进制是:" + Integer.toString(n, x));
+```
+x进制转10进制
+```java
+String s = "11111";
+int num = Integer.parseInt(s,2);
+```
+## 数组和集合的相互转换
+数组转集合
+```java
+Integer[] array = { 1, 2, 3 };
+List<Integer> list = new ArrayList<Integer>(Arrays.asList(array));
+```
+集合转数组
+```java
+List<Integer> list = new ArrayList<Integer>();
+list.add(1);
+list.add(2);
+list.add(3);
+Integer[] array = new Integer[list.size()];
+list.toArray(array);
 ```
