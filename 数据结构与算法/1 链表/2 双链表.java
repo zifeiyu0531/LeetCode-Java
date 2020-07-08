@@ -25,7 +25,7 @@ class DLinkedList {
 
     // 获取表头
     public DLinkedNode getHead() {
-        return head.next;
+        return head;
     }
 
     // 判断链表是否为空
