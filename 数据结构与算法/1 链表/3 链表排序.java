@@ -1,4 +1,4 @@
-class ListSort {
+class Solution_1 {
     public void sort(LinkedNode head) {
         if (head.next == null) {
             return;
