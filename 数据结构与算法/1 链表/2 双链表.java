@@ -123,24 +123,3 @@ class DLinkedList {
         return str;
     }
 }
-
-class Test {
-    public static void main(String[] args) {
-        DLinkedList list = new DLinkedList();
-        System.out.println(list.size());
-        System.out.println(list.toString());
-        System.out.println(list.isEmpty());
-        list.add(1);
-        list.add(2);
-        list.add(3);
-        System.out.println(list.size());
-        System.out.println(list.toString());
-        System.out.println(list.isEmpty());
-        list.add(0, 0);
-        System.out.println(list.toString());
-        list.remove();
-        list.remove(0);
-        System.out.println(list.toString());
-        System.out.println(list.get(0).val);
-    }
-}
