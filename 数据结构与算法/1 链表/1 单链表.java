@@ -23,7 +23,7 @@ class LinkedList {
 
     // 获取表头
     public LinkedNode getHead() {
-        return head.next;
+        return head;
     }
 
     // 判断链表是否为空
