@@ -1,31 +1,29 @@
-// 双链表节点DlinkedNode
-class DLinkedNode {
+// 链表节点LinkedNode
+class LinkedNode {
     public int val;
-    public DLinkedNode next;
-    public DLinkedNode pre;
+    public LinkedNode next;
 
-    public DLinkedNode() {
+    public LinkedNode() {
         this(-1);
     }
 
-    public DLinkedNode(int val) {
+    public LinkedNode(int val) {
         this.val = val;
         this.next = null;
-        this.pre = null;
     }
 }
 
-// 双链表DLinkedList
-class DLinkedList {
-    public DLinkedNode head;
+// 链表LinkedList
+class LinkedList {
+    public LinkedNode head;
 
-    public DLinkedList() {
-        this.head = new DLinkedNode();
+    public LinkedList() {
+        this.head = new LinkedNode();
     }
 
     // 获取表头
-    public DLinkedNode getHead() {
-        return head.next;
+    public LinkedNode getHead() {
+        return head;
     }
 
     // 判断链表是否为空
@@ -43,52 +41,45 @@ class DLinkedList {
         if (index < 0 || index > this.size()) {
             return false;
         }
-        DLinkedNode p = head;
+        LinkedNode p = head;
         int n = 0;
         while (n < index) {
             p = p.next;
             n++;
         }
-        DLinkedNode node = new DLinkedNode(val);
+        LinkedNode node = new LinkedNode(val);
         node.next = p.next;
-        if (p.next != null) {
-            p.next.pre = node;
-        }
         p.next = node;
-        node.pre = p;
         return true;
     }
 
     // 移除链表末尾元素
-    public DLinkedNode remove() {
+    public LinkedNode remove() {
         return this.remove(this.size() - 1);
     }
 
     // 移除链表指定位置元素。若不存在，返回null
-    public DLinkedNode remove(int index) {
+    public LinkedNode remove(int index) {
         if (index >= this.size()) {
             return null;
         }
-        DLinkedNode p = head;
+        LinkedNode p = head;
         int n = 0;
         while (n < index) {
             p = p.next;
             n++;
         }
-        DLinkedNode node = p.next;
+        LinkedNode node = p.next;
         p.next = p.next.next;
-        if (p.next != null) {
-            p.next.pre = p;
-        }
         return node;
     }
 
     // 获取链表指定位置元素。若不存在，返回null
-    public DLinkedNode get(int index) {
+    public LinkedNode get(int index) {
         if (index >= this.size()) {
             return null;
         }
-        DLinkedNode p = head;
+        LinkedNode p = head;
         int n = 0;
         while (n < index) {
             p = p.next;
@@ -99,7 +90,7 @@ class DLinkedList {
 
     // 获取链表长度
     public int size() {
-        DLinkedNode p = head;
+        LinkedNode p = head;
         int n = 0;
         while (p.next != null) {
             p = p.next;
@@ -110,37 +101,59 @@ class DLinkedList {
 
     // 输出链表
     public String toString() {
-        DLinkedNode p = head;
+        LinkedNode p = head;
         String str = "";
         if (p.next == null) {
             return "";
         }
         while (p.next.next != null) {
             p = p.next;
-            str += p.val + "<->";
+            str += p.val + "->";
         }
         str += p.next.val;
         return str;
     }
 }
 
-class Test {
+class Solution {
+    public void UnionList(LinkedNode LA, LinkedNode LB) {
+        LinkedNode p1 = LA.next, p2 = LB.next;
+        LinkedNode index = LA;
+        while (p1 != null || p2 != null) {
+            if (p1 == null) {
+                index.next = p2;
+                break;
+            } else if (p2 == null) {
+                index.next = p1;
+                break;
+            } else {
+                if (p1.val < p2.val) {
+                    index.next = p1;
+                    p1 = p1.next;
+                } else {
+                    index.next = p2;
+                    p2 = p2.next;
+                }
+            }
+            index = index.next;
+        }
+    }
+
     public static void main(String[] args) {
-        DLinkedList list = new DLinkedList();
-        System.out.println(list.size());
-        System.out.println(list.toString());
-        System.out.println(list.isEmpty());
-        list.add(1);
-        list.add(2);
-        list.add(3);
-        System.out.println(list.size());
-        System.out.println(list.toString());
-        System.out.println(list.isEmpty());
-        list.add(0, 0);
-        System.out.println(list.toString());
-        list.remove();
-        list.remove(0);
-        System.out.println(list.toString());
-        System.out.println(list.get(0).val);
+        LinkedList list1 = new LinkedList();
+        list1.add(1);
+        list1.add(4);
+        list1.add(5);
+        list1.add(7);
+        LinkedList list2 = new LinkedList();
+        list2.add(1);
+        list2.add(4);
+        list2.add(5);
+        list2.add(7);
+        System.out.println(list1.toString());
+        System.out.println(list2.toString());
+        Solution solution = new Solution();
+        solution.UnionList(list1.getHead(), list2.getHead());
+        System.out.println(list1.toString());
     }
 }
