@@ -103,6 +103,9 @@ class LinkedList {
     public String toString() {
         LinkedNode p = head;
         String str = "";
+        if (p.next == null) {
+            return "";
+        }
         while (p.next.next != null) {
             p = p.next;
             str += p.val + "->";
