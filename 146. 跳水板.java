@@ -38,5 +38,10 @@ class Solution_146 {
     }
 
     public static void main(String args[]) {
+        Solution_146 solution = new Solution_146();
+        int shorter = 1;
+        int longer = 2;
+        int k = 3;
+        System.out.println(Arrays.toString(solution.divingBoard(shorter, longer, k)));
     }
 }
