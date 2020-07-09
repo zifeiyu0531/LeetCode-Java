@@ -1,4 +1,11 @@
 class Solution_2 {
+    /**
+     * 合并有序链表
+     * 
+     * @param LA 有序链表头节点
+     * @param LB 有序链表头节点
+     * @return 合并后的链表头节点
+     */
     public LinkedNode<Integer> UnionList(LinkedNode<Integer> LA, LinkedNode<Integer> LB) {
         LinkedNode<Integer> p1 = LA, p2 = LB;
         LinkedNode<Integer> preHead = new LinkedNode<Integer>(-1);
