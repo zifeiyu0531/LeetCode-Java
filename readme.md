@@ -38,6 +38,15 @@
   - [`int`,`String`,`char`的相互转换](#intstringchar的相互转换)
   - [进制转换](#进制转换)
   - [数组和集合的相互转换](#数组和集合的相互转换)
+- [链表](#链表)
+  - [单链表](#单链表)
+  - [双链表](#双链表)
+  - [链表排序](#链表排序)
+    - [算法思路](#算法思路)
+    - [代码](#代码)
+  - [合并有序链表](#合并有序链表)
+    - [算法思路](#算法思路-1)
+    - [代码](#代码-1)
 # 字符串
 ## String
 `str.indexOf(String s)` 查找字符串s在指定字符串中首次出现的位置
@@ -863,4 +872,362 @@ list.add(2);
 list.add(3);
 Integer[] array = new Integer[list.size()];
 list.toArray(array);
+```
+# 链表
+## 单链表
+链表节点`LinkedNode`
+```java
+// 链表节点LinkedNode
+class LinkedNode<T> {
+    public T val;
+    public LinkedNode<T> next;
+
+    public LinkedNode() {
+        this(null);
+    }
+
+    public LinkedNode(T val) {
+        this.val = val;
+        this.next = null;
+    }
+}
+```
+链表`MyLinkedList`
+
+`LinkedNode<T> getHead()` 获取表头
+
+`boolean isEmpty()` 判断链表是否为空
+
+`void add(T val)` 向链表末尾添加元素
+
+`void add(int index, T val)` 向链表指定位置添加元素
+
+`T remove()` 移除链表末尾元素
+
+`T remove(int index)` 移除链表指定位置元素
+
+`T get(int index)` 获取链表指定位置元素
+
+`int size()` 获取链表长度
+
+`String toString()` 输出链表
+```java
+class MyLinkedList<T> {
+    public LinkedNode<T> head;
+
+    public MyLinkedList() {
+        this.head = new LinkedNode<T>();
+        head.next = null;
+    }
+
+    // 获取表头
+    public LinkedNode<T> getHead() {
+        if (this.isEmpty()) {
+            throw new NullPointerException();
+        }
+        return head.next;
+    }
+
+    // 判断链表是否为空
+    public boolean isEmpty() {
+        return head.next == null;
+    }
+
+    // 向链表末尾添加元素
+    public void add(T val) {
+        this.add(this.size(), val);
+    }
+
+    // 向链表指定位置添加元素
+    public void add(int index, T val) {
+        if (index < 0 || index > this.size()) {
+            throw new NullPointerException();
+        }
+        LinkedNode<T> p = head;
+        int n = 0;
+        while (n < index) {
+            p = p.next;
+            n++;
+        }
+        LinkedNode<T> node = new LinkedNode<T>(val);
+        node.next = p.next;
+        p.next = node;
+    }
+
+    // 移除链表末尾元素
+    public T remove() {
+        return this.remove(this.size() - 1);
+    }
+
+    // 移除链表指定位置元素
+    public T remove(int index) {
+        if (index < 0 || index >= this.size()) {
+            throw new NullPointerException();
+        }
+        LinkedNode<T> p = head;
+        int n = 0;
+        while (n < index) {
+            p = p.next;
+            n++;
+        }
+        T val = p.next.val;
+        p.next = p.next.next;
+        return val;
+    }
+
+    // 获取链表指定位置元素
+    public T get(int index) {
+        if (index < 0 || index >= this.size()) {
+            throw new NullPointerException();
+        }
+        LinkedNode<T> p = head;
+        int n = 0;
+        while (n < index) {
+            p = p.next;
+            n++;
+        }
+        return p.next.val;
+    }
+
+    // 获取链表长度
+    public int size() {
+        LinkedNode<T> p = head;
+        int n = 0;
+        while (p.next != null) {
+            p = p.next;
+            n++;
+        }
+        return n;
+    }
+
+    // 输出链表
+    public String toString() {
+        LinkedNode<T> p = head;
+        String str = "";
+        if (p.next == null) {
+            return "";
+        }
+        while (p.next.next != null) {
+            p = p.next;
+            str += p.val + "->";
+        }
+        str += p.next.val;
+        return str;
+    }
+}
+```
+## 双链表
+双链表节点`DlinkedNode`
+```java
+class DLinkedNode<T> {
+    public T val;
+    public DLinkedNode<T> next;
+    public DLinkedNode<T> pre;
+
+    public DLinkedNode() {
+        this(null);
+    }
+
+    public DLinkedNode(T val) {
+        this.val = val;
+        this.next = null;
+        this.pre = null;
+    }
+}
+```
+双链表`MyDLinkedList`
+
+`DLinkedNode<T> getHead()` 获取表头
+
+`boolean isEmpty()` 判断链表是否为空
+
+`void add(T val)` 向链表末尾添加元素
+
+`void add(int index, T val)` 向链表指定位置添加元素
+
+`T remove()` 移除链表末尾元素
+
+`T remove(int index)` 移除链表指定位置元素
+
+`T get(int index)` 获取链表指定位置元素
+
+`int size()` 获取链表长度
+
+`String toString()` 输出链表
+```java
+class MyDLinkedList<T> {
+    public DLinkedNode<T> head;
+
+    public MyDLinkedList() {
+        this.head = new DLinkedNode<T>();
+    }
+
+    // 获取表头
+    public DLinkedNode<T> getHead() {
+        return head.next;
+    }
+
+    // 判断链表是否为空
+    public boolean isEmpty() {
+        return head.next == null;
+    }
+
+    // 向链表末尾添加元素
+    public void add(T val) {
+        this.add(this.size(), val);
+    }
+
+    // 向链表指定位置添加元素
+    public void add(int index, T val) {
+        if (index < 0 || index > this.size()) {
+            throw new NullPointerException();
+        }
+        DLinkedNode<T> p = head;
+        int n = 0;
+        while (n < index) {
+            p = p.next;
+            n++;
+        }
+        DLinkedNode<T> node = new DLinkedNode<T>(val);
+        node.next = p.next;
+        if (p.next != null) {
+            p.next.pre = node;
+        }
+        p.next = node;
+        node.pre = p;
+    }
+
+    // 移除链表末尾元素
+    public T remove() {
+        return this.remove(this.size() - 1);
+    }
+
+    // 移除链表指定位置元素
+    public T remove(int index) {
+        if (index < 0 || index >= this.size()) {
+            throw new NullPointerException();
+        }
+        DLinkedNode<T> p = head;
+        int n = 0;
+        while (n < index) {
+            p = p.next;
+            n++;
+        }
+        DLinkedNode<T> node = p.next;
+        p.next = p.next.next;
+        if (p.next != null) {
+            p.next.pre = p;
+        }
+        return node.val;
+    }
+
+    // 获取链表指定位置元素
+    public T get(int index) {
+        if (index < 0 || index >= this.size()) {
+            throw new NullPointerException();
+        }
+        DLinkedNode<T> p = head;
+        int n = 0;
+        while (n < index) {
+            p = p.next;
+            n++;
+        }
+        return p.next.val;
+    }
+
+    // 获取链表长度
+    public int size() {
+        DLinkedNode<T> p = head;
+        int n = 0;
+        while (p.next != null) {
+            p = p.next;
+            n++;
+        }
+        return n;
+    }
+
+    // 输出链表
+    public String toString() {
+        DLinkedNode<T> p = head;
+        String str = "";
+        if (p.next == null) {
+            return "";
+        }
+        while (p.next.next != null) {
+            p = p.next;
+            str += p.val + "<->";
+        }
+        str += p.next.val;
+        return str;
+    }
+}
+```
+## 链表排序
+输入待排序链表头节点，输出排序后链表头节点
+### 算法思路
+### 代码
+```java
+/**
+ * 链表排序
+ * 
+ * @param head 待排序链表头节点
+ * @return 排序后链表头节点
+ */
+public LinkedNode<Integer> sort(LinkedNode<Integer> head) {
+    if (head == null) {
+        return null;
+    }
+    LinkedNode<Integer> preHead = new LinkedNode<Integer>(-1);
+    preHead.next = head;
+    LinkedNode<Integer> p = preHead, q = head.next;
+    head.next = null;
+    while (q != null) {
+        LinkedNode<Integer> temp = q.next;
+        p = preHead;
+        while (p.next != null && p.next.val <= q.val) {
+            p = p.next;
+        }
+        q.next = p.next;
+        p.next = q;
+        q = temp;
+    }
+    return preHead.next;
+}
+```
+## 合并有序链表
+输入两个有序链表头节点，输出合并后的链表头节点
+### 算法思路
+### 代码
+```java
+/**
+ * 合并有序链表
+ * 
+ * @param LA 有序链表头节点
+ * @param LB 有序链表头节点
+ * @return 合并后的链表头节点
+ */
+public LinkedNode<Integer> UnionList(LinkedNode<Integer> LA, LinkedNode<Integer> LB) {
+    LinkedNode<Integer> p1 = LA, p2 = LB;
+    LinkedNode<Integer> preHead = new LinkedNode<Integer>(-1);
+    LinkedNode<Integer> index = preHead;
+    while (p1 != null || p2 != null) {
+        if (p1 == null) {
+            index.next = p2;
+            break;
+        } else if (p2 == null) {
+            index.next = p1;
+            break;
+        } else {
+            if (p1.val < p2.val) {
+                index.next = p1;
+                p1 = p1.next;
+            } else {
+                index.next = p2;
+                p2 = p2.next;
+            }
+        }
+        index = index.next;
+    }
+    return preHead.next;
+}
 ```
