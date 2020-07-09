@@ -78,20 +78,3 @@ class MyQueue<T> {
         return str;
     }
 }
-
-class Solution {
-    public static void main(String[] args) {
-        MyQueue<Integer> queue = new MyQueue<Integer>();
-        System.out.println(queue.isEmpty());
-        System.out.println(queue.toString());
-        queue.offer(1);
-        queue.offer(2);
-        queue.offer(3);
-        System.out.println(queue.isEmpty());
-        System.out.println(queue.toString());
-        int num = queue.poll();
-        int num2 = queue.element();
-        System.out.println(num2);
-        System.out.println(queue.toString());
-    }
-}
