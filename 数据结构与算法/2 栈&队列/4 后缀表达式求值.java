@@ -1,5 +1,3 @@
-import java.util.*;
-
 class Solution_2 {
     /**
      * 后缀表达式求值
@@ -8,7 +6,7 @@ class Solution_2 {
      * @return 求得的值(整数形式)
      */
     public int evalSuf(String[] suffix) {
-        Stack<Integer> stack = new Stack<Integer>();
+        MyStack<Integer> stack = new MyStack<Integer>();
         String regex = "^-?\\d+$";
         for (String str : suffix) {
             if (str.matches(regex)) {
