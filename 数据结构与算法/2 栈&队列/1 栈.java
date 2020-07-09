@@ -26,7 +26,7 @@ class MyStack<T> {
         return head.next == null;
     }
 
-    // 元素e进栈
+    // 元素进栈
     public void push(T e) {
         StackNode<T> p = new StackNode<T>(e);
         p.next = head.next;
