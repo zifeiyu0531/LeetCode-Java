@@ -1,19 +1,22 @@
 class Solution_1 {
-    public void sort(LinkedNode head) {
-        if (head.next == null) {
-            return;
+    public LinkedNode<Integer> sort(LinkedNode<Integer> head) {
+        if (head == null) {
+            return null;
         }
-        LinkedNode p = head.next.next;
-        head.next.next = null;
-        while (p != null) {
-            LinkedNode q = p.next;
-            LinkedNode pre = head;
-            while (pre.next != null && pre.next.val <= p.val) {
-                pre = pre.next;
+        LinkedNode<Integer> preHead = new LinkedNode<Integer>(-1);
+        preHead.next = head;
+        LinkedNode<Integer> p = preHead, q = head.next;
+        head.next = null;
+        while (q != null) {
+            LinkedNode<Integer> temp = q.next;
+            p = preHead;
+            while (p.next != null && p.next.val <= q.val) {
+                p = p.next;
             }
-            p.next = pre.next;
-            pre.next = p;
-            p = q;
+            q.next = p.next;
+            p.next = q;
+            q = temp;
         }
+        return preHead.next;
     }
 }
