@@ -1,6 +1,12 @@
 import java.util.*;
 
-class Solution {
+class Solution_3 {
+    /**
+     * 验证字符串是否为回文串
+     * 
+     * @param str 待验证的字符串
+     * @return 是回文串返回true,否则返回false
+     */
     public boolean isPalindrome(String str) {
         Stack<Character> stack = new Stack<Character>();
         for (char ch : str.toCharArray()) {
@@ -12,11 +18,5 @@ class Solution {
             }
         }
         return true;
-    }
-
-    public static void main(String[] args) {
-        Solution solution = new Solution();
-        String str = "ababaa";
-        System.out.println(solution.isPalindrome(str));
     }
 }
