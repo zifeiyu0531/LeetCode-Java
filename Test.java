@@ -1,3 +1,5 @@
+import sun.jvm.hotspot.tools.SysPropsDumper;
+
 // 链表节点LinkedNode
 class LinkedNode<T> {
     public T val;
@@ -41,9 +43,9 @@ class MyLinkedList<T> {
     }
 
     // 向链表指定位置添加元素
-    public boolean add(int index, T val) {
+    public void add(int index, T val) {
         if (index < 0 || index > this.size()) {
-            return false;
+            throw new NullPointerException();
         }
         LinkedNode<T> p = head;
         int n = 0;
@@ -54,7 +56,6 @@ class MyLinkedList<T> {
         LinkedNode<T> node = new LinkedNode<T>(val);
         node.next = p.next;
         p.next = node;
-        return true;
     }
 
     // 移除链表末尾元素
@@ -62,10 +63,10 @@ class MyLinkedList<T> {
         return this.remove(this.size() - 1);
     }
 
-    // 移除链表指定位置元素。若不存在，返回null
+    // 移除链表指定位置元素
     public T remove(int index) {
-        if (index >= this.size()) {
-            return null;
+        if (index < 0 || index >= this.size()) {
+            throw new NullPointerException();
         }
         LinkedNode<T> p = head;
         int n = 0;
@@ -78,10 +79,10 @@ class MyLinkedList<T> {
         return val;
     }
 
-    // 获取链表指定位置元素。若不存在，返回null
+    // 获取链表指定位置元素
     public T get(int index) {
-        if (index >= this.size()) {
-            return null;
+        if (index < 0 || index >= this.size()) {
+            throw new NullPointerException();
         }
         LinkedNode<T> p = head;
         int n = 0;
@@ -120,37 +121,44 @@ class MyLinkedList<T> {
 }
 
 class Solution {
-    public LinkedNode<Integer> sort(LinkedNode<Integer> head) {
-        if (head == null) {
-            return null;
-        }
+    public LinkedNode<Integer> UnionList(LinkedNode<Integer> LA, LinkedNode<Integer> LB) {
+        LinkedNode<Integer> p1 = LA, p2 = LB;
         LinkedNode<Integer> preHead = new LinkedNode<Integer>(-1);
-        preHead.next = head;
-        LinkedNode<Integer> p = preHead, q = head.next;
-        head.next = null;
-        while (q != null) {
-            LinkedNode<Integer> temp = q.next;
-            p = preHead;
-            while (p.next != null && p.next.val <= q.val) {
-                p = p.next;
+        LinkedNode<Integer> index = preHead;
+        while (p1 != null || p2 != null) {
+            if (p1 == null) {
+                index.next = p2;
+                break;
+            } else if (p2 == null) {
+                index.next = p1;
+                break;
+            } else {
+                if (p1.val < p2.val) {
+                    index.next = p1;
+                    p1 = p1.next;
+                } else {
+                    index.next = p2;
+                    p2 = p2.next;
+                }
             }
-            q.next = p.next;
-            p.next = q;
-            q = temp;
+            index = index.next;
         }
         return preHead.next;
     }
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        MyLinkedList<Integer> list = new MyLinkedList<Integer>();
-        list.add(5);
-        list.add(4);
-        list.add(2);
-        list.add(1);
-        list.add(3);
-        System.out.println(list.toString());
-        list.head.next = solution.sort(list.getHead());
-        System.out.println(list.toString());
+        MyLinkedList<Integer> list1 = new MyLinkedList<Integer>();
+        MyLinkedList<Integer> list2 = new MyLinkedList<Integer>();
+        list1.add(1);
+        list1.add(4);
+        list1.add(6);
+        list1.add(9);
+        list2.add(2);
+        list2.add(3);
+        list2.add(8);
+        list2.add(10);
+        list1.head.next = solution.UnionList(list1.getHead(), list2.getHead());
+        System.out.println(list1.toString());
     }
 }

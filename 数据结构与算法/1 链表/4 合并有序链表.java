@@ -1,7 +1,8 @@
 class Solution_2 {
-    public void UnionList(LinkedNode LA, LinkedNode LB) {
-        LinkedNode p1 = LA.next, p2 = LB.next;
-        LinkedNode index = LA;
+    public LinkedNode<Integer> UnionList(LinkedNode<Integer> LA, LinkedNode<Integer> LB) {
+        LinkedNode<Integer> p1 = LA, p2 = LB;
+        LinkedNode<Integer> preHead = new LinkedNode<Integer>(-1);
+        LinkedNode<Integer> index = preHead;
         while (p1 != null || p2 != null) {
             if (p1 == null) {
                 index.next = p2;
@@ -20,5 +21,6 @@ class Solution_2 {
             }
             index = index.next;
         }
+        return preHead.next;
     }
 }
