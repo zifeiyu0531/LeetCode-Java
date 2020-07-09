@@ -1,5 +1,3 @@
-import java.util.*;
-
 class Solution_3 {
     /**
      * 验证字符串是否为回文串
@@ -8,7 +6,7 @@ class Solution_3 {
      * @return 是回文串返回true,否则返回false
      */
     public boolean isPalindrome(String str) {
-        Stack<Character> stack = new Stack<Character>();
+        MyStack<Character> stack = new MyStack<Character>();
         for (char ch : str.toCharArray()) {
             stack.push(ch);
         }
