@@ -9,7 +9,7 @@ class Solution_1 {
      */
     public String[] InfToSuf(String infix) {
         List<String> suffix = new ArrayList<String>();
-        Stack<String> stack = new Stack<String>();
+        MyStack<String> stack = new MyStack<String>();
         for (int i = 0; i < infix.length(); i++) {
             int j = i + 1;
             String regex = "^-?\\d+$";
