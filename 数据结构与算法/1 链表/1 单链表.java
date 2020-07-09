@@ -41,9 +41,9 @@ class MyLinkedList<T> {
     }
 
     // 向链表指定位置添加元素
-    public boolean add(int index, T val) {
+    public void add(int index, T val) {
         if (index < 0 || index > this.size()) {
-            return false;
+            throw new NullPointerException();
         }
         LinkedNode<T> p = head;
         int n = 0;
@@ -54,7 +54,6 @@ class MyLinkedList<T> {
         LinkedNode<T> node = new LinkedNode<T>(val);
         node.next = p.next;
         p.next = node;
-        return true;
     }
 
     // 移除链表末尾元素
@@ -62,10 +61,10 @@ class MyLinkedList<T> {
         return this.remove(this.size() - 1);
     }
 
-    // 移除链表指定位置元素。若不存在，返回null
+    // 移除链表指定位置元素
     public T remove(int index) {
-        if (index >= this.size()) {
-            return null;
+        if (index < 0 || index >= this.size()) {
+            throw new NullPointerException();
         }
         LinkedNode<T> p = head;
         int n = 0;
@@ -78,10 +77,10 @@ class MyLinkedList<T> {
         return val;
     }
 
-    // 获取链表指定位置元素。若不存在，返回null
+    // 获取链表指定位置元素
     public T get(int index) {
-        if (index >= this.size()) {
-            return null;
+        if (index < 0 || index >= this.size()) {
+            throw new NullPointerException();
         }
         LinkedNode<T> p = head;
         int n = 0;
