@@ -1,14 +1,14 @@
 // 双链表节点DlinkedNode
-class DLinkedNode {
-    public int val;
-    public DLinkedNode next;
-    public DLinkedNode pre;
+class DLinkedNode<T> {
+    public T val;
+    public DLinkedNode<T> next;
+    public DLinkedNode<T> pre;
 
     public DLinkedNode() {
-        this(-1);
+        this(null);
     }
 
-    public DLinkedNode(int val) {
+    public DLinkedNode(T val) {
         this.val = val;
         this.next = null;
         this.pre = null;
@@ -16,16 +16,16 @@ class DLinkedNode {
 }
 
 // 双链表DLinkedList
-class DLinkedList {
-    public DLinkedNode head;
+class MyDLinkedList<T> {
+    public DLinkedNode<T> head;
 
-    public DLinkedList() {
-        this.head = new DLinkedNode();
+    public MyDLinkedList() {
+        this.head = new DLinkedNode<T>();
     }
 
     // 获取表头
-    public DLinkedNode getHead() {
-        return head;
+    public DLinkedNode<T> getHead() {
+        return head.next;
     }
 
     // 判断链表是否为空
@@ -34,72 +34,71 @@ class DLinkedList {
     }
 
     // 向链表末尾添加元素
-    public void add(int val) {
+    public void add(T val) {
         this.add(this.size(), val);
     }
 
     // 向链表指定位置添加元素
-    public boolean add(int index, int val) {
+    public void add(int index, T val) {
         if (index < 0 || index > this.size()) {
-            return false;
+            throw new NullPointerException();
         }
-        DLinkedNode p = head;
+        DLinkedNode<T> p = head;
         int n = 0;
         while (n < index) {
             p = p.next;
             n++;
         }
-        DLinkedNode node = new DLinkedNode(val);
+        DLinkedNode<T> node = new DLinkedNode<T>(val);
         node.next = p.next;
         if (p.next != null) {
             p.next.pre = node;
         }
         p.next = node;
         node.pre = p;
-        return true;
     }
 
     // 移除链表末尾元素
-    public DLinkedNode remove() {
+    public T remove() {
         return this.remove(this.size() - 1);
     }
 
-    // 移除链表指定位置元素。若不存在，返回null
-    public DLinkedNode remove(int index) {
-        if (index >= this.size()) {
-            return null;
+    // 移除链表指定位置元素
+    public T remove(int index) {
+        if (index < 0 || index >= this.size()) {
+            throw new NullPointerException();
         }
-        DLinkedNode p = head;
+        DLinkedNode<T> p = head;
         int n = 0;
         while (n < index) {
             p = p.next;
             n++;
         }
-        DLinkedNode node = p.next;
+        DLinkedNode<T> node = p.next;
         p.next = p.next.next;
         if (p.next != null) {
             p.next.pre = p;
         }
-        return node;
+        return node.val;
     }
 
-    // 获取链表指定位置元素。若不存在，返回null
-    public DLinkedNode get(int index) {
-        if (index >= this.size()) {
-            return null;
+    // 获取链表指定位置元素
+    public T get(int index) {
+        if (index < 0 || index >= this.size()) {
+            throw new NullPointerException();
         }
-        DLinkedNode p = head;
+        DLinkedNode<T> p = head;
         int n = 0;
         while (n < index) {
             p = p.next;
             n++;
         }
-        return p.next;
+        return p.next.val;
     }
 
     // 获取链表长度
     public int size() {
-        DLinkedNode p = head;
+        DLinkedNode<T> p = head;
         int n = 0;
         while (p.next != null) {
             p = p.next;
@@ -110,7 +109,7 @@ class DLinkedList {
 
     // 输出链表
     public String toString() {
-        DLinkedNode p = head;
+        DLinkedNode<T> p = head;
         String str = "";
         if (p.next == null) {
             return "";
