@@ -13,7 +13,7 @@ class StackNode<T> {
     }
 }
 
-// 栈类型Stack
+// 栈类型MyStack
 class MyStack<T> {
     StackNode<T> head;
 
