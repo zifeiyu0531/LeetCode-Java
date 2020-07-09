@@ -1,5 +1,3 @@
-import java.util.*;
-
 // 栈节点StackNode
 class StackNode<T> {
     public T val;
