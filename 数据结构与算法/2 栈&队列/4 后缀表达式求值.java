@@ -1,6 +1,12 @@
 import java.util.*;
 
-class Solution {
+class Solution_2 {
+    /**
+     * 后缀表达式求值
+     * 
+     * @param suffix 后缀表达式的数组形式
+     * @return 求得的值(整数形式)
+     */
     public int evalSuf(String[] suffix) {
         Stack<Integer> stack = new Stack<Integer>();
         String regex = "^-?\\d+$";
@@ -27,11 +33,5 @@ class Solution {
             }
         }
         return stack.pop();
-    }
-
-    public static void main(String[] args) {
-        Solution solution = new Solution();
-        String[] suffix = { "56", "20", "+", "4", "2", "*", "/" };
-        System.out.println(solution.evalSuf(suffix));
     }
 }
