@@ -31,27 +31,6 @@ class Solution_154 {
         return preHead.next;
     }
 
-    public ListNode insertionSortList(ListNode head) {
-        if (head == null) {
-            return null;
-        }
-        ListNode preHead = new ListNode(-1);
-        preHead.next = head;
-        ListNode p = preHead, q = head.next;
-        head.next = null;
-        while (q != null) {
-            ListNode temp = q.next;
-            p = preHead;
-            while (p.next != null && p.next.val <= q.val) {
-                p = p.next;
-            }
-            q.next = p.next;
-            p.next = q;
-            q = temp;
-        }
-        return preHead.next;
-    }
-
     public static void main(String args[]) {
     }
 }
