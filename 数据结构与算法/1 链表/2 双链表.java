@@ -15,7 +15,7 @@ class DLinkedNode<T> {
     }
 }
 
-// 双链表DLinkedList
+// 双链表MyDLinkedList
 class MyDLinkedList<T> {
     public DLinkedNode<T> head;
 
