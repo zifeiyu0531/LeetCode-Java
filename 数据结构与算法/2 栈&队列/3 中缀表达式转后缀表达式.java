@@ -1,6 +1,6 @@
 import java.util.*;
 
-class Solution {
+class Solution_1 {
     /**
      * 中缀表达式转后缀表达式
      * 
@@ -56,11 +56,5 @@ class Solution {
         String[] array = new String[suffix.size()];
         suffix.toArray(array);
         return array;
-    }
-
-    public static void main(String[] args) {
-        Solution solution = new Solution();
-        String infix = "(56+20)/(4*2)";
-        System.out.println(Arrays.toString(solution.InfToSuf(infix)));
     }
 }
