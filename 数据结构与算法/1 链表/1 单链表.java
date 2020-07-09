@@ -13,7 +13,7 @@ class LinkedNode<T> {
     }
 }
 
-// 链表LinkedList
+// 链表MyLinkedList
 class MyLinkedList<T> {
     public LinkedNode<T> head;
 
