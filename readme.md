@@ -106,7 +106,7 @@ String newstr_2 = str.split(".", 2);
 `str.matches(String regex)` 判断str是否匹配正则表达式regex
 ```java
 String str = "hello wobrld";
-String regex = "[a-zA-Z]";
+String regex = "[a-zA-Z]*";
 boolean b = str.matches(regex);
 ```
 `str.toCharArray()` 字符串转char[]
