@@ -1,29 +1,33 @@
 // 链表节点LinkedNode
-class LinkedNode {
-    public int val;
-    public LinkedNode next;
+class LinkedNode<T> {
+    public T val;
+    public LinkedNode<T> next;
 
     public LinkedNode() {
-        this(-1);
+        this(null);
     }
 
-    public LinkedNode(int val) {
+    public LinkedNode(T val) {
         this.val = val;
         this.next = null;
     }
 }
 
 // 链表LinkedList
-class LinkedList {
-    public LinkedNode head;
+class MyLinkedList<T> {
+    public LinkedNode<T> head;
 
-    public LinkedList() {
-        this.head = new LinkedNode();
+    public MyLinkedList() {
+        this.head = new LinkedNode<T>();
+        head.next = null;
     }
 
     // 获取表头
-    public LinkedNode getHead() {
-        return head;
+    public LinkedNode<T> getHead() {
+        if (this.isEmpty()) {
+            throw new NullPointerException();
+        }
+        return head.next;
     }
 
     // 判断链表是否为空
@@ -32,65 +36,65 @@ class LinkedList {
     }
 
     // 向链表末尾添加元素
-    public void add(int val) {
+    public void add(T val) {
         this.add(this.size(), val);
     }
 
     // 向链表指定位置添加元素
-    public boolean add(int index, int val) {
+    public boolean add(int index, T val) {
         if (index < 0 || index > this.size()) {
             return false;
         }
-        LinkedNode p = head;
+        LinkedNode<T> p = head;
         int n = 0;
         while (n < index) {
             p = p.next;
             n++;
         }
-        LinkedNode node = new LinkedNode(val);
+        LinkedNode<T> node = new LinkedNode<T>(val);
         node.next = p.next;
         p.next = node;
         return true;
     }
 
     // 移除链表末尾元素
-    public LinkedNode remove() {
+    public T remove() {
         return this.remove(this.size() - 1);
     }
 
     // 移除链表指定位置元素。若不存在，返回null
-    public LinkedNode remove(int index) {
+    public T remove(int index) {
         if (index >= this.size()) {
             return null;
         }
-        LinkedNode p = head;
+        LinkedNode<T> p = head;
         int n = 0;
         while (n < index) {
             p = p.next;
             n++;
         }
-        LinkedNode node = p.next;
+        T val = p.next.val;
         p.next = p.next.next;
-        return node;
+        return val;
     }
 
     // 获取链表指定位置元素。若不存在，返回null
-    public LinkedNode get(int index) {
+    public T get(int index) {
         if (index >= this.size()) {
             return null;
         }
-        LinkedNode p = head;
+        LinkedNode<T> p = head;
         int n = 0;
         while (n < index) {
             p = p.next;
             n++;
         }
-        return p.next;
+        return p.next.val;
     }
 
     // 获取链表长度
     public int size() {
-        LinkedNode p = head;
+        LinkedNode<T> p = head;
         int n = 0;
         while (p.next != null) {
             p = p.next;
@@ -101,7 +105,7 @@ class LinkedList {
 
     // 输出链表
     public String toString() {
-        LinkedNode p = head;
+        LinkedNode<T> p = head;
         String str = "";
         if (p.next == null) {
             return "";
