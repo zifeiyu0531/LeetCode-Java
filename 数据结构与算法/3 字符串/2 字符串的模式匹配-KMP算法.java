@@ -1,4 +1,4 @@
-class Solution {
+class Solution_2 {
     /**
      * 现有目标串s与模式串t，要求返回s中与t相同的字串起始下标位置，若没有，返回-1
      * 
@@ -37,11 +37,5 @@ class Solution {
                 k = next[k];
             }
         }
-    }
-
-    public static void main(String[] args) {
-        String s = "aaaaab", t = "aacb";
-        Solution solution = new Solution();
-        System.out.println(solution.KMP(s, t));
     }
 }
