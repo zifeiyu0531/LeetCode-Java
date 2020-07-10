@@ -1,4 +1,4 @@
-class Solution {
+class Solution_1 {
     /**
      * 现有目标串s与模式串t，要求返回s中与t相同的字串起始下标位置，若没有，返回-1
      * 
@@ -22,11 +22,5 @@ class Solution {
         } else {
             return -1;
         }
-    }
-
-    public static void main(String[] args) {
-        String s = "aaaaab", t = "aaab";
-        Solution solution = new Solution();
-        System.out.println(solution.bruteForce(s, t));
     }
 }
