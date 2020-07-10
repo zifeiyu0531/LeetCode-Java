@@ -47,6 +47,18 @@
   - [合并有序链表](#合并有序链表)
     - [算法思路](#算法思路-1)
     - [代码](#代码-1)
+- [栈&队列](#栈队列)
+  - [栈](#栈)
+  - [队列](#队列)
+  - [中缀表达式转后缀表达式](#中缀表达式转后缀表达式)
+    - [算法思路](#算法思路-2)
+    - [代码](#代码-2)
+  - [后缀表达式求值](#后缀表达式求值)
+    - [算法思路](#算法思路-3)
+    - [代码](#代码-3)
+  - [验证回文串](#验证回文串)
+    - [算法思路](#算法思路-4)
+    - [代码](#代码-4)
 # 字符串
 ## String
 `str.indexOf(String s)` 查找字符串s在指定字符串中首次出现的位置
@@ -1229,5 +1241,316 @@ public LinkedNode<Integer> UnionList(LinkedNode<Integer> LA, LinkedNode<Integer>
         index = index.next;
     }
     return preHead.next;
+}
+```
+# 栈&队列
+## 栈
+栈节点`StackNode`
+```java
+class StackNode<T> {
+    public T val;
+    public StackNode<T> next;
+
+    public StackNode() {
+        this(null);
+    }
+
+    public StackNode(T val) {
+        this.val = val;
+        this.next = null;
+    }
+}
+```
+栈类型`MyStack`
+
+`boolean isEmpty()` 判断栈是否为空
+
+`void push(T e)` 元素进栈
+
+`T pop()` 栈顶元素出栈
+
+`T peek()` 取栈顶元素
+
+`String toString()` 打印栈
+```java
+class MyStack<T> {
+    StackNode<T> head;
+
+    public MyStack() {
+        head = new StackNode<T>();
+    }
+
+    // 判断栈是否为空
+    public boolean isEmpty() {
+        return head.next == null;
+    }
+
+    // 元素进栈
+    public void push(T e) {
+        StackNode<T> p = new StackNode<T>(e);
+        p.next = head.next;
+        head.next = p;
+    }
+
+    // 栈顶元素出栈
+    public T pop() {
+        if (this.isEmpty()) {
+            throw new NullPointerException();
+        }
+        T val = head.next.val;
+        head.next = head.next.next;
+        return val;
+    }
+
+    // 取栈顶元素
+    public T peek() {
+        if (this.isEmpty()) {
+            throw new NullPointerException();
+        }
+        T val = head.next.val;
+        return val;
+    }
+
+    // 打印栈
+    public String toString() {
+        if (this.isEmpty()) {
+            return "";
+        }
+        String str = "";
+        StackNode<T> node = head;
+        while (node.next.next != null) {
+            node = node.next;
+            str += node.val + "->";
+        }
+        str += node.next.val;
+        return str;
+    }
+}
+```
+## 队列
+队列节点`QueueNode`
+```java
+class QueueNode<T> {
+    public T val;
+    public QueueNode<T> next;
+
+    public QueueNode() {
+        this(null);
+    }
+
+    public QueueNode(T val) {
+        this.val = val;
+        this.next = null;
+    }
+}
+```
+队列类型`MyQueue`
+
+`boolean isEmpty()` 判断队列是否为空
+
+`void offer(T e)` 元素进队
+
+`T poll()` 元素出队
+
+`T element()` 取队首元素
+
+`String toString()` 打印队列
+```java
+class MyQueue<T> {
+    QueueNode<T> head;
+    QueueNode<T> tail;
+
+    public MyQueue() {
+        head = null;
+        tail = null;
+    }
+
+    // 判断队列是否为空
+    public boolean isEmpty() {
+        return tail == null;
+    }
+
+    // 元素进队
+    public void offer(T e) {
+        QueueNode<T> node = new QueueNode<T>(e);
+        if (this.isEmpty()) {
+            head = node;
+            tail = node;
+        } else {
+            tail.next = node;
+            tail = tail.next;
+        }
+    }
+
+    // 元素出队
+    public T poll() {
+        if (this.isEmpty()) {
+            throw new NullPointerException();
+        }
+        T val = head.val;
+        if (head == tail) {
+            head = null;
+            tail = null;
+        } else {
+            head = head.next;
+        }
+        return val;
+    }
+
+    // 取队首元素
+    public T element() {
+        if (this.isEmpty()) {
+            throw new NullPointerException();
+        }
+        return head.val;
+    }
+
+    // 打印队列
+    public String toString() {
+        if (this.isEmpty()) {
+            return "";
+        }
+        QueueNode<T> node = head;
+        String str = "[";
+        while (node.next != null) {
+            str += node.val + ", ";
+            node = node.next;
+        }
+        str += node.val + "]";
+        return str;
+    }
+}
+```
+## 中缀表达式转后缀表达式
+输入中缀表达式字符串形式，输出后缀表达式数组形式
+### 算法思路
+### 代码
+```java
+import java.util.*;
+
+class Solution_1 {
+    /**
+     * 中缀表达式转后缀表达式
+     * 
+     * @param Infix 中缀表达式
+     * @return 后缀表达式的数组形式
+     */
+    public String[] InfToSuf(String infix) {
+        List<String> suffix = new ArrayList<String>();
+        MyStack<String> stack = new MyStack<String>();
+        for (int i = 0; i < infix.length(); i++) {
+            int j = i + 1;
+            String regex = "^-?\\d+$";
+            while (j <= infix.length() && infix.substring(i, j).matches(regex)) {
+                j++;
+            }
+            if (j > i + 1) {
+                String num = infix.substring(i, j - 1);
+                suffix.add(num);
+                i = j - 2;
+            } else {
+                String str = infix.substring(i, i + 1);
+                switch (str) {
+                    case "(":
+                        stack.push(str);
+                        break;
+                    case ")":
+                        while (!stack.peek().equals("(")) {
+                            suffix.add(stack.pop());
+                        }
+                        stack.pop();
+                        break;
+                    case "+":
+                    case "-":
+                        while (!stack.isEmpty() && !stack.peek().equals("(")) {
+                            suffix.add(stack.pop());
+                        }
+                        stack.push(str);
+                        break;
+                    case "*":
+                    case "/":
+                        while (!stack.isEmpty() && !stack.peek().equals("(") && !stack.peek().equals("+")
+                                && !stack.peek().equals("-")) {
+                            suffix.add(stack.pop());
+                        }
+                        stack.push(str);
+                        break;
+                }
+            }
+        }
+        while (!stack.isEmpty()) {
+            suffix.add(stack.pop());
+        }
+        String[] array = new String[suffix.size()];
+        suffix.toArray(array);
+        return array;
+    }
+}
+```
+## 后缀表达式求值
+输入后缀表达式的数组形式，输出求得的值(整数形式)
+### 算法思路
+### 代码
+```java
+class Solution_2 {
+    /**
+     * 后缀表达式求值
+     * 
+     * @param suffix 后缀表达式的数组形式
+     * @return 求得的值(整数形式)
+     */
+    public int evalSuf(String[] suffix) {
+        MyStack<Integer> stack = new MyStack<Integer>();
+        String regex = "^-?\\d+$";
+        for (String str : suffix) {
+            if (str.matches(regex)) {
+                stack.push(Integer.parseInt(str));
+            } else {
+                int num1 = stack.pop(), num2 = stack.pop();
+                switch (str) {
+                    case "+":
+                        num2 += num1;
+                        break;
+                    case "-":
+                        num2 -= num1;
+                        break;
+                    case "*":
+                        num2 *= num1;
+                        break;
+                    case "/":
+                        num2 /= num1;
+                        break;
+                }
+                stack.push(num2);
+            }
+        }
+        return stack.pop();
+    }
+}
+```
+## 验证回文串
+输入待验证的字符串，是回文串返回true，否则返回false
+### 算法思路
+### 代码
+```java
+class Solution_3 {
+    /**
+     * 验证字符串是否为回文串
+     * 
+     * @param str 待验证的字符串
+     * @return 是回文串返回true,否则返回false
+     */
+    public boolean isPalindrome(String str) {
+        MyStack<Character> stack = new MyStack<Character>();
+        for (char ch : str.toCharArray()) {
+            stack.push(ch);
+        }
+        for (char ch : str.toCharArray()) {
+            if (ch != stack.pop()) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
 ```
