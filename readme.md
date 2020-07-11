@@ -59,6 +59,13 @@
   - [验证回文串](#验证回文串)
     - [算法思路](#算法思路-4)
     - [代码](#代码-4)
+- [字符串模式匹配](#字符串模式匹配)
+  - [暴力法(Brute-Force)](#暴力法brute-force)
+    - [算法思路](#算法思路-5)
+    - [代码](#代码-5)
+  - [KMP算法](#kmp算法)
+    - [算法思路](#算法思路-6)
+    - [代码](#代码-6)
 # 字符串
 ## String
 `str.indexOf(String s)` 查找字符串s在指定字符串中首次出现的位置
@@ -1551,6 +1558,85 @@ class Solution_3 {
             }
         }
         return true;
+    }
+}
+```
+# 字符串模式匹配
+现有目标串s与模式串t，要求返回s中与t相同的字串起始下标位置，若没有，返回-1
+## 暴力法(Brute-Force)
+### 算法思路
+### 代码
+```java
+class Solution_1 {
+    /**
+     * 现有目标串s与模式串t，要求返回s中与t相同的字串起始下标位置，若没有，返回-1
+     * 
+     * @param s 目标串
+     * @param t 模式串
+     * @return s中与t相同的字串起始下标位置
+     */
+    public int bruteForce(String s, String t) {
+        int i = 0, j = 0;
+        while (i < s.length() && j < t.length()) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+                j++;
+            } else {
+                i = i - j + 1;
+                j = 0;
+            }
+        }
+        if (j >= t.length()) {
+            return i - t.length();
+        } else {
+            return -1;
+        }
+    }
+}
+```
+##  KMP算法
+### 算法思路
+### 代码
+```java
+class Solution_2 {
+    /**
+     * 现有目标串s与模式串t，要求返回s中与t相同的字串起始下标位置，若没有，返回-1
+     * 
+     * @param s 目标串
+     * @param t 模式串
+     * @return s中与t相同的字串起始下标位置
+     */
+    public int KMP(String s, String t) {
+        int[] next = new int[t.length()];
+        getNext(t, next);
+        int i = 0, j = 0;
+        while (i < s.length() && j < t.length()) {
+            if (j == -1 || s.charAt(i) == t.charAt(j)) {
+                i++;
+                j++;
+            } else {
+                j = next[j];
+            }
+        }
+        if (j >= t.length()) {
+            return i - t.length();
+        } else {
+            return -1;
+        }
+    }
+
+    private void getNext(String t, int[] next) {
+        int j = 0, k = -1;
+        next[0] = -1;
+        while (j < t.length() - 1) {
+            if (k == -1 || t.charAt(j) == t.charAt(k)) {
+                j++;
+                k++;
+                next[j] = k;
+            } else {
+                k = next[k];
+            }
+        }
     }
 }
 ```
