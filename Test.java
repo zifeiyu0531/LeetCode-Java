@@ -151,6 +151,29 @@ class MyTreeOrder {
         }
         return str;
     }
+
+    public String levelOrder(BTNode<Character> root) {
+        if (root == null) {
+            return "";
+        }
+        Deque<BTNode<Character>> queue = new LinkedList<BTNode<Character>>();
+        queue.add(root);
+        String str = "";
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                BTNode<Character> node = queue.removeFirst();
+                str += node.val + " ";
+                if (node.left != null) {
+                    queue.addLast(node.left);
+                }
+                if (node.right != null) {
+                    queue.addLast(node.right);
+                }
+            }
+        }
+        return str;
+    }
 }
 
 class Solution {
@@ -163,5 +186,6 @@ class Solution {
         System.out.println(treeOrder.preOrder(root));
         System.out.println(treeOrder.inOrder(root));
         System.out.println(treeOrder.postOrder(root));
+        System.out.println(treeOrder.levelOrder(root));
     }
 }
