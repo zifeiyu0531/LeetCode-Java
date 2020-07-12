@@ -66,6 +66,24 @@
   - [KMP算法](#kmp算法)
     - [算法思路](#算法思路-6)
     - [代码](#代码-6)
+- [二叉树](#二叉树)
+  - [二叉树的构造](#二叉树的构造)
+    - [算法思路](#算法思路-7)
+      - [1 构造](#1-构造)
+      - [2 输出](#2-输出)
+    - [代码](#代码-7)
+  - [前序遍历](#前序遍历)
+    - [算法思路](#算法思路-8)
+    - [代码](#代码-8)
+  - [中序遍历](#中序遍历)
+    - [算法思路](#算法思路-9)
+    - [代码](#代码-9)
+  - [后序遍历](#后序遍历)
+    - [算法思路](#算法思路-10)
+    - [代码](#代码-10)
+  - [层次遍历](#层次遍历)
+    - [算法思路](#算法思路-11)
+    - [代码](#代码-11)
 # 字符串
 ## String
 `str.indexOf(String s)` 查找字符串s在指定字符串中首次出现的位置
@@ -1638,5 +1656,209 @@ class Solution_2 {
             }
         }
     }
+}
+```
+# 二叉树
+## 二叉树的构造
+### 算法思路
+#### 1 构造
+#### 2 输出
+### 代码
+二叉树节点`BTNode`
+```java
+class BTNode<T> {
+    T val;
+    BTNode<T> left;
+    BTNode<T> right;
+
+    public BTNode() {
+        this(null);
+    }
+
+    public BTNode(T val) {
+        this.val = val;
+        this.left = null;
+        this.right = null;
+    }
+}
+```
+二叉树基本运算
+```java
+class MyBTree {
+    BTNode<Character> root;
+
+    public MyBTree() {
+        root = null;
+    }
+
+    // 返回根节点
+    public BTNode<Character> getRoot() {
+        return this.root;
+    }
+
+    // 根据规范字符串建立二叉树
+    public void CreatTree(String str) {
+        Stack<BTNode<Character>> stack = new Stack<BTNode<Character>>();
+        BTNode<Character> p = null;
+        boolean isLeft = true;
+        for (char ch : str.toCharArray()) {
+            switch (ch) {
+                case '(':
+                    stack.push(p);
+                    isLeft = true;
+                    break;
+                case ')':
+                    stack.pop();
+                    break;
+                case ',':
+                    isLeft = false;
+                    break;
+                default:
+                    p = new BTNode<Character>(ch);
+                    if (root == null) {
+                        root = p;
+                    } else {
+                        if (isLeft) {
+                            stack.peek().left = p;
+                        } else {
+                            stack.peek().right = p;
+                        }
+                    }
+            }
+        }
+    }
+
+    // 根据给定val值找到对应节点并返回
+    public BTNode<Character> getNode(BTNode<Character> root, char val) {
+        if (root == null) {
+            return null;
+        }
+        if (root.val == val) {
+            return root;
+        } else {
+            BTNode<Character> p = getNode(root.left, val);
+            if (p != null) {
+                return p;
+            } else {
+                return getNode(root.right, val);
+            }
+        }
+    }
+
+    // 获取二叉树最大深度
+    public int getDepth(BTNode<Character> root) {
+        return root == null ? 0 : Math.max(getDepth(root.left) + 1, getDepth(root.right) + 1);
+    }
+
+    // 格式化输出二叉树
+    public String toString(BTNode<Character> root) {
+        String str = "";
+        if (root != null) {
+            str += root.val;
+            if (root.left != null || root.right != null) {
+                str += "(";
+                str += toString(root.left);
+                if (root.right != null) {
+                    str += ",";
+                }
+                str += toString(root.right);
+                str += ")";
+            }
+        }
+        return str;
+    }
+}
+```
+## 前序遍历
+### 算法思路
+### 代码
+```java
+/**
+ * 二叉树前序遍历：先访问根节点，再访问左子树，最后访问右子树
+ * 
+ * @param root 二叉树根节点
+ * @return 前序遍历字符串
+ */
+public String preOrder(BTNode<Character> root) {
+    String str = "";
+    if (root != null) {
+        str += root.val + " ";
+        str += preOrder(root.left);
+        str += preOrder(root.right);
+    }
+    return str;
+}
+```
+## 中序遍历
+### 算法思路
+### 代码
+```java
+/**
+ * 二叉树中序遍历：先访问左子树，再访问根节点，最后访问右子树
+ * 
+ * @param root 二叉树根节点
+ * @return 中序遍历字符串
+ */
+public String inOrder(BTNode<Character> root) {
+    String str = "";
+    if (root != null) {
+        str += inOrder(root.left);
+        str += root.val + " ";
+        str += inOrder(root.right);
+    }
+    return str;
+}
+```
+## 后序遍历
+### 算法思路
+### 代码
+```java
+/**
+ * 二叉树后序遍历：先访问左子树，再访问右子树，最后访问根节点
+ * 
+ * @param root 二叉树根节点
+ * @return 后序遍历字符串
+ */
+public String postOrder(BTNode<Character> root) {
+    String str = "";
+    if (root != null) {
+        str += postOrder(root.left);
+        str += postOrder(root.right);
+        str += root.val + " ";
+    }
+    return str;
+}
+```
+## 层次遍历
+### 算法思路
+### 代码
+```java
+/**
+ * 二叉树层次遍历：按层访问所有节点
+ * 
+ * @param root 二叉树根节点
+ * @return 层次遍历字符串
+ */
+public String levelOrder(BTNode<Character> root) {
+    if (root == null) {
+        return "";
+    }
+    Deque<BTNode<Character>> queue = new LinkedList<BTNode<Character>>();
+    queue.add(root);
+    String str = "";
+    while (!queue.isEmpty()) {
+        int size = queue.size();
+        for (int i = 0; i < size; i++) {
+            BTNode<Character> node = queue.removeFirst();
+            str += node.val + " ";
+            if (node.left != null) {
+                queue.addLast(node.left);
+            }
+            if (node.right != null) {
+                queue.addLast(node.right);
+            }
+        }
+    }
+    return str;
 }
 ```
