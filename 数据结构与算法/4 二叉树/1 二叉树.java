@@ -102,15 +102,3 @@ class MyBTree {
         return str;
     }
 }
-
-class Solution {
-    public static void main(String[] args) {
-        MyBTree tree = new MyBTree();
-        String str = "A(B(D(,G)),C(E,F))";
-        tree.CreatTree(str);
-        System.out.println(tree.toString(tree.getRoot()));
-        System.out.println(tree.getDepth(tree.getRoot()));
-        System.out.println(tree.getNode(tree.getRoot(), 'C').val);
-        System.out.println(tree.getNode(tree.getRoot(), 'R'));
-    }
-}
