@@ -20,12 +20,4 @@ class MySearch {
         }
         return -1;
     }
-
-    public static void main(String[] args) {
-        MySearch solution = new MySearch();
-        int[] nums = { 1, 2, 5, 8, 9, 11, 12, 15 };
-        int key_1 = 12, key_2 = 10;
-        System.out.println(solution.BinarySearch(nums, key_1));
-        System.out.println(solution.BinarySearch(nums, key_2));
-    }
 }
