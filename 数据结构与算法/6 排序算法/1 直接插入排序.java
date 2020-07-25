@@ -1,6 +1,7 @@
 class Solution_1 {
     /**
      * 直接插入排序
+     * 
      * @param nums 待排序数组
      */
     void insertSort(int[] nums) {
