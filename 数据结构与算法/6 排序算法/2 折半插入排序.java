@@ -1,6 +1,9 @@
-import java.util.*;
-
-class Solution {
+class Solution_2 {
+    /**
+     * 折半插入排序
+     * 
+     * @param nums 待排序数组
+     */
     void binaryInsertSort(int[] nums) {
         for (int i = 1; i < nums.length; i++) {
             if (nums[i] < nums[i - 1]) {
@@ -20,12 +23,5 @@ class Solution {
                 nums[right + 1] = temp;
             }
         }
-    }
-
-    public static void main(String[] args) {
-        Solution solution = new Solution();
-        int[] nums = { 7, 3, 6, 5, 2, 0, 8 };
-        solution.binaryInsertSort(nums);
-        System.out.println(Arrays.toString(nums));
     }
 }
