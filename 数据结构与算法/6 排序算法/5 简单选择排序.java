@@ -1,6 +1,9 @@
-import java.util.*;
-
-class Solution {
+class Solution_5 {
+    /**
+     * 简单选择排序
+     * 
+     * @param nums 待排序数组
+     */
     public void selectSort(int[] nums) {
         for (int i = 0; i < nums.length; i++) {
             int min = i;
@@ -15,12 +18,5 @@ class Solution {
                 nums[min] = temp;
             }
         }
-    }
-
-    public static void main(String[] args) {
-        Solution solution = new Solution();
-        int[] nums = { 7, 3, 6, 5, 2, 0, 8 };
-        solution.selectSort(nums);
-        System.out.println(Arrays.toString(nums));
     }
 }
