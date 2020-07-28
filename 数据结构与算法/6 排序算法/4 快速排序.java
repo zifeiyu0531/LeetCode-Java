@@ -1,6 +1,11 @@
-import java.util.*;
-
-class Solution {
+class Solution_4 {
+    /**
+     * 快速排序
+     * 
+     * @param nums  待排序数组
+     * @param left  待排序区间最左侧
+     * @param right 待排序区间最右侧
+     */
     public void quickSort(int[] nums, int leftIndex, int rightIndex) {
         if (leftIndex >= rightIndex) {
             return;
@@ -20,12 +25,5 @@ class Solution {
         nums[left] = key;
         quickSort(nums, leftIndex, left - 1);
         quickSort(nums, right + 1, rightIndex);
-    }
-
-    public static void main(String[] args) {
-        Solution solution = new Solution();
-        int[] nums = { 7, 3, 6, 5, 2, 0, 8 };
-        solution.quickSort(nums, 0, nums.length - 1);
-        System.out.println(Arrays.toString(nums));
     }
 }
