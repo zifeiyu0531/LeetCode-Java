@@ -84,6 +84,14 @@
   - [层次遍历](#层次遍历)
     - [算法思路](#算法思路-11)
     - [代码](#代码-11)
+- [查找算法](#查找算法)
+  - [折半查找](#折半查找)
+- [排序算法](#排序算法)
+  - [直接插入排序](#直接插入排序)
+  - [折半插入排序](#折半插入排序)
+  - [冒泡排序](#冒泡排序)
+  - [快速排序](#快速排序)
+  - [简单选择排序](#简单选择排序)
 # 字符串
 ## String
 `str.indexOf(String s)` 查找字符串s在指定字符串中首次出现的位置
@@ -1860,5 +1868,162 @@ public String levelOrder(BTNode<Character> root) {
         }
     }
     return str;
+}
+```
+# 查找算法
+## 折半查找
+```java
+/**
+ * 折半查找
+ * 
+ * @param nums 有序数组nums
+ * @param key  目标值key
+ * @return key在nums中的位置（不存在返回-1）
+ */
+public int BinarySearch(int[] nums, int key) {
+    int left = 0, right = nums.length - 1;
+    while (left <= right) {
+        int mid = (left + right) / 2;
+        if (nums[mid] == key) {
+            return mid;
+        } else if (nums[mid] < key) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+    return -1;
+}
+```
+# 排序算法
+## 直接插入排序
+```java
+class Solution_1 {
+    /**
+     * 直接插入排序
+     * 
+     * @param nums 待排序数组
+     */
+    void insertSort(int[] nums) {
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] < nums[i - 1]) {
+                int temp = nums[i];
+                int j = i - 1;
+                while (j >= 0 && nums[j] > temp) {
+                    nums[j + 1] = nums[j];
+                    j--;
+                }
+                nums[j + 1] = temp;
+            }
+        }
+    }
+}
+```
+## 折半插入排序
+```java
+class Solution_2 {
+    /**
+     * 折半插入排序
+     * 
+     * @param nums 待排序数组
+     */
+    void binaryInsertSort(int[] nums) {
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] < nums[i - 1]) {
+                int temp = nums[i];
+                int left = 0, right = i - 1;
+                while (left <= right) {
+                    int mid = (left + right) / 2;
+                    if (temp > nums[mid]) {
+                        left = mid + 1;
+                    } else {
+                        right = mid - 1;
+                    }
+                }
+                for (int j = i - 1; j > right; j--) {
+                    nums[j + 1] = nums[j];
+                }
+                nums[right + 1] = temp;
+            }
+        }
+    }
+}
+```
+## 冒泡排序
+```java
+class Solution_3 {
+    /**
+     * 冒泡排序
+     * 
+     * @param nums 待排序数组
+     */
+    void bubbleSort(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = nums.length - 1; j > i; j--) {
+                if (nums[j] < nums[j - 1]) {
+                    int temp = nums[j];
+                    nums[j] = nums[j - 1];
+                    nums[j - 1] = temp;
+                }
+            }
+        }
+    }
+}
+```
+## 快速排序
+```java
+class Solution_4 {
+    /**
+     * 快速排序
+     * 
+     * @param nums  待排序数组
+     * @param left  待排序区间最左侧
+     * @param right 待排序区间最右侧
+     */
+    public void quickSort(int[] nums, int leftIndex, int rightIndex) {
+        if (leftIndex >= rightIndex) {
+            return;
+        }
+        int key = nums[leftIndex];
+        int left = leftIndex, right = rightIndex;
+        while (left < right) {
+            while (left < right && nums[right] >= key) {
+                right--;
+            }
+            nums[left] = nums[right];
+            while (left < right && nums[left] <= key) {
+                left++;
+            }
+            nums[right] = nums[left];
+        }
+        nums[left] = key;
+        quickSort(nums, leftIndex, left - 1);
+        quickSort(nums, right + 1, rightIndex);
+    }
+}
+```
+## 简单选择排序
+```java
+class Solution_5 {
+    /**
+     * 简单选择排序
+     * 
+     * @param nums 待排序数组
+     */
+    public void selectSort(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            int min = i;
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[min] > nums[j]) {
+                    min = j;
+                }
+            }
+            if (min != i) {
+                int temp = nums[i];
+                nums[i] = nums[min];
+                nums[min] = temp;
+            }
+        }
+    }
 }
 ```
