@@ -17,12 +17,12 @@ class Solution_167 {
     public int majorityElement(int[] nums) {
         int candidate = -1, count = 0;
         for (int i : nums) {
-            if(count == 0){
+            if (count == 0) {
                 candidate = i;
             }
-            if(candidate == i){
+            if (candidate == i) {
                 count++;
-            }else{
+            } else {
                 count--;
             }
         }
