@@ -1,5 +1,3 @@
-import java.util.*;
-
 // 给你一个二进制字符串数组 strs 和两个整数 m 和 n 。
 
 // 请你找出并返回 strs 的最大子集的大小，该子集中 最多 有 m 个 0 和 n 个 1 。
@@ -39,7 +37,7 @@ class Solution_194 {
         }
         return dp[m][n];
     }
-    
+
     public int[] countzeroesones(String s) {
         int[] c = new int[2];
         for (int i = 0; i < s.length(); i++) {
