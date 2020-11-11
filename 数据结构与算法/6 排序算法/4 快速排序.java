@@ -24,6 +24,6 @@ class Solution_4 {
         }
         nums[left] = key;
         quickSort(nums, leftIndex, left - 1);
-        quickSort(nums, right + 1, rightIndex);
+        quickSort(nums, left + 1, rightIndex);
     }
 }
