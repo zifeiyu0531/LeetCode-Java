@@ -1,33 +1,36 @@
 import java.util.*;
 
 class Solution {
-    public int getLongestPalindrome(String A, int n) {
-        if (n <= 1) {
-            return n;
+
+    private int partition(int[] nums, int left, int right) {
+        int temp = nums[left];
+        while (left < right) {
+            while (left < right && nums[right] >= temp) {
+                right--;
+            }
+            nums[left] = nums[right];
+            while (left < right && nums[left] <= temp) {
+                left++;
+            }
+            nums[right] = nums[left];
         }
-        int dp = 1;
-        for (int i = 1; i < n; i++) {
-            dp = Math.max(dp, getPalindrome(A.substring(0, i + 1)));
-        }
-        return dp;
+        nums[left] = temp;
+        return left;
     }
 
-    private int getPalindrome(String s) {
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == s.charAt(s.length() - 1)) {
-                StringBuilder sb = new StringBuilder(s.substring(i, s.length()));
-                if (sb.equals(sb.reverse())) {
-                    return s.length() - i;
-                }
-            }
+    private void quickSort(int[] nums, int left, int right) {
+        if (left < right) {
+            int index = partition(nums, left, right);
+            quickSort(nums, left, index - 1);
+            quickSort(nums, index + 1, right);
         }
-        return 0;
     }
 
     public static void main(String args[]) {
         Solution solution = new Solution();
-        String A = "ccbcabaabba";
-        int n = 11;
-        System.out.println(solution.getLongestPalindrome(A, n));
+        int[] nums = { 3, 1 };
+        solution.quickSort(nums, 0, nums.length - 1);
+        System.out.println(Arrays.toString(nums));
+        // System.out.println(solution.permuteUnique(num).toString());
     }
 }
