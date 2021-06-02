@@ -26,3 +26,11 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+class Solution_231 {
+    public int maxDepth(TreeNode root) {
+        return root == null ? 0 : Math.max(1 + maxDepth(root.left), 1 + maxDepth(root.right));
+    }
+
+    public static void main(String args[]) {
+    }
+}
