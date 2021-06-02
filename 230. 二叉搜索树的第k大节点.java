@@ -37,8 +37,27 @@
  * }
  */
 class Solution_230 {
-    public int maxDepth(TreeNode root) {
-        return root == null ? 0 : Math.max(1 + maxDepth(root.left), 1 + maxDepth(root.right));
+    private int target;
+    private int k;
+
+    public int kthLargest(TreeNode root, int k) {
+        this.k = k;
+        mid_order(root);
+        return target;
+    }
+
+    private void mid_order(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        mid_order(root.right);
+        if (k == 0) {
+            return;
+        }
+        if (k-- == 1) {
+            target = root.val;
+        }
+        mid_order(root.left);
     }
 
     public static void main(String args[]) {
