@@ -50,4 +50,3 @@ class Solution_221 {
     public static void main(String args[]) {
     }
 }
-
