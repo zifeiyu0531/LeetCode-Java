@@ -69,10 +69,10 @@ public class Student {
 class Test{
     public static void main(String[] args) {
         Student student = new Student.Builder(123, "zhangsan")
-                            .setSex("nan")
+                            .setSex("男")
                             .setAge(12)
                             .setAddress("address")
-                            .setHobby("hobby")
+                            .setHobby("sing dance rap basketball")
                             .build();
         System.out.println(student.toString());
     }
