@@ -1,12 +1,12 @@
 package DesignPattern.BuilderPattern;
 
 public class Student {
-    private int id; // 必选
-    private String name; // 必选
-    private String sex; // 可选
-    private int age; // 可选
-    private String address; // 可选
-    private String hobby; // 可选
+    private int id;
+    private String name;
+    private String sex;
+    private int age;
+    private String address;
+    private String hobby;
 
     private Student(Builder builder) {
         this.id = builder.id;
@@ -18,12 +18,12 @@ public class Student {
     }
 
     public static class Builder {
-        private int id; // 必选
-        private String name; // 必选
-        private String sex; // 可选
-        private int age; // 可选
-        private String address; // 可选
-        private String hobby; // 可选
+        private int id;
+        private String name;
+        private String sex;
+        private int age;
+        private String address;
+        private String hobby;
 
         public Builder(int id, String name) {
             this.id = id;
