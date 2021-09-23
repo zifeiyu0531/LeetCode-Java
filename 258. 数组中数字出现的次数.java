@@ -15,7 +15,7 @@
 // 限制：
 
 // 2 <= nums.length <= 10000
-class Solution_257 {
+class Solution_258 {
     public int[] singleNumbers(int[] nums) {
         int ret = 0;
         for (int num : nums) {
@@ -37,7 +37,7 @@ class Solution_257 {
     }
 
     public static void main(String args[]) {
-        Solution_257 solution = new Solution_257();
+        Solution_258 solution = new Solution_258();
         int[] nums_1 = { 4, 1, 4, 6 }, nums_2 = { 1, 2, 10, 4, 1, 4, 3, 3 };
         System.out.println(solution.singleNumbers(nums_1));
         System.out.println(solution.singleNumbers(nums_2));
