@@ -21,7 +21,7 @@ import java.util.*;
  * Definition for singly-linked list. public class ListNode { int val; ListNode
  * next; ListNode(int x) { val = x; } }
  */
-class Solution {
+class Solution_274 {
     public ListNode removeDuplicateNodes(ListNode head) {
         ListNode p = new ListNode();
         p.next = head;
