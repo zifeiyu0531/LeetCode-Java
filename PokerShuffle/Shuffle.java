@@ -51,8 +51,8 @@ public class Shuffle {
             }
         }
         for (int i = 0; i < POKERLENGTH; i++) {
-            sum1[i] /= (round);
-            sum2[i] /= (round);
+            sum1[i] /= round;
+            sum2[i] /= round;
         }
         System.out.println(Arrays.toString(sum1));
         System.out.println(Arrays.toString(sum2));
