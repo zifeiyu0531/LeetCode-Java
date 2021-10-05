@@ -10,14 +10,14 @@
 // minStack.pop();
 // minStack.top();      --> 返回 0.
 // minStack.getMin();   --> 返回 -2.
-class MinStack {
+class MinStack_1 {
     private int[] stack;
     private int[] minStack;
     private int top;
     private int minTop;
 
     /** initialize your data structure here. */
-    public MinStack() {
+    public MinStack_1() {
         this.stack = new int[10000];
         this.minStack = new int[10000];
         this.top = 0;
