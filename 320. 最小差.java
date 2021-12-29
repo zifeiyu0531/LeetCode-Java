@@ -15,10 +15,6 @@ import java.util.Arrays;
 // 1 <= a.length, b.length <= 100000
 // -2147483648 <= a[i], b[i] <= 2147483647
 // 正确结果在区间 [0, 2147483647] 内
-
-// 来源：力扣（LeetCode）
-// 链接：https://leetcode-cn.com/problems/smallest-difference-lcci
-// 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 class Solution_320 {
     public int smallestDifference(int[] a, int[] b) {
         Arrays.sort(a);
