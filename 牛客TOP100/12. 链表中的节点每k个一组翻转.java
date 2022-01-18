@@ -1,7 +1,5 @@
 package 牛客TOP100;
 
-import java.util.*;
-
 /*
  * public class ListNode {
  *   int val;
