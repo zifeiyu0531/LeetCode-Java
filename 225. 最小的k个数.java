@@ -24,11 +24,7 @@ class Solution_225 {
         if (k == 0) {
             return result;
         }
-        PriorityQueue<Integer> queue = new PriorityQueue<>(new Comparator<Integer>() {
-            public int compare(Integer num1, Integer num2) {
-                return num2 - num1;
-            }
-        });
+        PriorityQueue<Integer> queue = new PriorityQueue<>((num1, num2) -> num2 - num1);
         for (int i = 0; i < k; i++) {
             queue.offer(arr[i]);
         }
